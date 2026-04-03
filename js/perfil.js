@@ -1,9 +1,9 @@
 function editarPerfil() {
   trocarTela("dados");
 
-  nome.value = localStorage.getItem("nome") || "";
-  endereco.value = localStorage.getItem("endereco") || "";
-  telefone.value = localStorage.getItem("telefone") || "";
+  document.getElementById("nome").value = localStorage.getItem("nome") || "";
+  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
+  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
 }
 
 function salvar() {
@@ -11,18 +11,34 @@ function salvar() {
   localStorage.setItem("endereco", endereco.value);
   localStorage.setItem("telefone", telefone.value);
 
-  alert("Salvo!");
+  alert("Dados salvos!");
   trocarTela("perfil");
 }
 
 function sair() {
-  const confirmar = confirm("Deseja realmente limpar seus dados?");
-
-  if (confirmar) {
+  if (confirm("Deseja realmente limpar seus dados?")) {
     localStorage.clear();
     alert("Dados apagados!");
     trocarTela("inicio");
   }
+}
+
+// ==========================
+// MOSTRAR DADOS NO PERFIL
+// ==========================
+function mostrarDadosCliente() {
+  const nome = localStorage.getItem("nome") || "Não informado";
+  const endereco = localStorage.getItem("endereco") || "Não informado";
+  const telefone = localStorage.getItem("telefone") || "Não informado";
+
+  const div = document.getElementById("dados-cliente");
+  if (!div) return;
+
+  div.innerHTML = `
+    <p><strong>Nome:</strong> ${nome}</p>
+    <p><strong>Endereço:</strong> ${endereco}</p>
+    <p><strong>Telefone:</strong> ${telefone}</p>
+  `;
 }
 
 // ==========================
@@ -49,16 +65,4 @@ function carregarHistorico() {
   }
 
   document.getElementById("historico").innerHTML = html;
-}
-
-function mostrarDadosCliente() {
-  const nome = localStorage.getItem("nome") || "Não informado";
-  const endereco = localStorage.getItem("endereco") || "Não informado";
-  const telefone = localStorage.getItem("telefone") || "Não informado";
-
-  document.getElementById("dados-cliente").innerHTML = `
-    <p><strong>Nome:</strong> ${nome}</p>
-    <p><strong>Endereço:</strong> ${endereco}</p>
-    <p><strong>Telefone:</strong> ${telefone}</p>
-  `;
 }
