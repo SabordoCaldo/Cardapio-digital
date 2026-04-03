@@ -138,29 +138,157 @@ function adicionarAoCarrinho(id) {
 
   alert("Item adicionado ao carrinho!");
 
-  // resetar quantidade
   quantidades[id] = 0;
   atualizarQtd(id);
 }
 
 // ==========================
-// CARREGAR CARRINHO
+// 🛒 CARREGAR CARRINHO (AJUSTADO)
 // ==========================
 function carregarCarrinho() {
   const tela = document.getElementById("carrinho");
 
   let html = `<h2>🛒 Carrinho</h2>`;
 
+  if (carrinho.length === 0) {
+    html += `<p>Carrinho vazio</p>`;
+    tela.innerHTML = html;
+    return;
+  }
+
+  let resumo = {};
   let total = 0;
 
   carrinho.forEach(item => {
-    html += `<p>${item.nome} - R$ ${item.preco.toFixed(2)}</p>`;
+    if (!resumo[item.nome]) {
+      resumo[item.nome] = { qtd: 0, preco: item.preco };
+    }
+    resumo[item.nome].qtd++;
     total += item.preco;
   });
 
+  html += `<h3>Itens:</h3>`;
+
+  for (let nome in resumo) {
+    const item = resumo[nome];
+    html += `<p>${item.qtd}x ${nome} &nbsp;&nbsp;&nbsp; R$ ${(item.preco * item.qtd).toFixed(2)}</p>`;
+  }
+
+  html += `<hr>`;
   html += `<h3>Total: R$ ${total.toFixed(2)}</h3>`;
 
+  html += `
+    <button onclick="irParaPagamento()" style="margin-top:10px;">
+      Finalizar pedido
+    </button>
+  `;
+
   tela.innerHTML = html;
+}
+
+// ==========================
+// 💳 IR PARA PAGAMENTO
+// ==========================
+function irParaPagamento() {
+  const tela = document.getElementById("carrinho");
+
+  const nome = localStorage.getItem("nome") || "";
+  const endereco = localStorage.getItem("endereco") || "";
+  const telefone = localStorage.getItem("telefone") || "";
+
+  let html = `
+    <h2>💳 Finalizar Pedido</h2>
+
+    <p><strong>Nome:</strong> ${nome}</p>
+    <p><strong>Endereço:</strong> ${endereco}</p>
+    <p><strong>Telefone:</strong> ${telefone}</p>
+
+    <h3>Forma de pagamento:</h3>
+
+    <select id="pagamento" onchange="verificarPagamento()">
+      <option value="">Selecione</option>
+      <option value="dinheiro">Dinheiro</option>
+      <option value="pix">Pix</option>
+      <option value="cartao">Cartão</option>
+    </select>
+
+    <div id="troco-area" style="margin-top:10px;"></div>
+
+    <button onclick="finalizarPedido()" style="margin-top:15px;">
+      Confirmar Pedido
+    </button>
+  `;
+
+  tela.innerHTML = html;
+}
+
+// ==========================
+// 💰 TROCO
+// ==========================
+function verificarPagamento() {
+  const tipo = document.getElementById("pagamento").value;
+  const area = document.getElementById("troco-area");
+
+  if (tipo === "dinheiro") {
+    area.innerHTML = `
+      <p>Precisa de troco?</p>
+      <input id="troco" type="number" placeholder="Digite o valor">
+    `;
+  } else {
+    area.innerHTML = "";
+  }
+}
+
+// ==========================
+// 📲 FINALIZAR PEDIDO
+// ==========================
+function finalizarPedido() {
+  const pagamento = document.getElementById("pagamento").value;
+  const trocoInput = document.getElementById("troco");
+
+  if (!pagamento) {
+    alert("Escolha a forma de pagamento!");
+    return;
+  }
+
+  if (pagamento === "dinheiro") {
+    if (!trocoInput || trocoInput.value === "") {
+      alert("Digite o valor para troco!");
+      return;
+    }
+  }
+
+  let mensagem = "*PEDIDO*\n\n";
+  mensagem += "Itens:\n";
+
+  let resumo = {};
+  let total = 0;
+
+  carrinho.forEach(item => {
+    if (!resumo[item.nome]) {
+      resumo[item.nome] = { qtd: 0, preco: item.preco };
+    }
+    resumo[item.nome].qtd++;
+    total += item.preco;
+  });
+
+  for (let nome in resumo) {
+    const item = resumo[nome];
+    mensagem += `${item.qtd}x ${nome} - R$ ${(item.preco * item.qtd).toFixed(2)}\n`;
+  }
+
+  mensagem += `\nTotal: R$ ${total.toFixed(2)}\n`;
+  mensagem += `Pagamento: ${pagamento}\n`;
+
+  if (pagamento === "dinheiro") {
+    mensagem += `Troco para: R$ ${trocoInput.value}\n`;
+  }
+
+  const numero = "5599999999999"; // coloque seu número
+
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+  window.open(url, "_blank");
 }
 
 // ==========================
