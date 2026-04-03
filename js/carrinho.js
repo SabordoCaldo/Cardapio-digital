@@ -1,11 +1,7 @@
 // ==========================
-// ESTADO
-// ==========================
 let carrinho = [];
 let quantidades = {};
 
-// ==========================
-// QTD
 // ==========================
 function adicionarQtd(id) {
   quantidades[id] = (quantidades[id] || 0) + 1;
@@ -22,8 +18,6 @@ function atualizarQtd(id) {
   if (el) el.innerText = quantidades[id] || 0;
 }
 
-// ==========================
-// ADD CARRINHO
 // ==========================
 function adicionarAoCarrinho(id) {
   const item = COMBOS.find(c => c.id === id);
@@ -44,8 +38,6 @@ function adicionarAoCarrinho(id) {
 }
 
 // ==========================
-// CARREGAR CARRINHO
-// ==========================
 function carregarCarrinho() {
   const tela = document.getElementById("carrinho");
 
@@ -57,19 +49,22 @@ function carregarCarrinho() {
     return;
   }
 
-  let resumo = {}, total = 0;
+  let resumo = {};
+  let total = 0;
 
-  carrinho.forEach(i => {
-    if (!resumo[i.nome]) resumo[i.nome] = { qtd: 0, preco: i.preco };
-    resumo[i.nome].qtd++;
-    total += i.preco;
+  carrinho.forEach(item => {
+    if (!resumo[item.nome]) {
+      resumo[item.nome] = { qtd: 0, preco: item.preco };
+    }
+    resumo[item.nome].qtd++;
+    total += item.preco;
   });
 
   html += `<h3>Itens:</h3>`;
 
   for (let nome in resumo) {
-    const i = resumo[nome];
-    html += `<p>${i.qtd}x ${nome} &nbsp;&nbsp;&nbsp; R$ ${(i.qtd * i.preco).toFixed(2)}</p>`;
+    const item = resumo[nome];
+    html += `<p>${item.qtd}x ${nome} &nbsp;&nbsp;&nbsp; R$ ${(item.qtd * item.preco).toFixed(2)}</p>`;
   }
 
   html += `<hr><h3>Total: R$ ${total.toFixed(2)}</h3>`;
