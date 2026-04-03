@@ -10,30 +10,32 @@ function trocarTela(id) {
 // PERFIL
 // ==========================
 function abrirCadastro() {
-  document.getElementById("form-cadastro").classList.remove("hidden");
-}
+  const form = document.getElementById("form-cadastro");
+  form.classList.remove("hidden");
 
-function salvar() {
-  const nome = document.getElementById("nome").value;
-  const endereco = document.getElementById("endereco").value;
-  const telefone = document.getElementById("telefone").value;
-
-  localStorage.setItem("nome", nome);
-  localStorage.setItem("endereco", endereco);
-  localStorage.setItem("telefone", telefone);
-
-  alert("Salvo com sucesso!");
-}
-
-function editarPerfil() {
-  document.getElementById("form-cadastro").classList.remove("hidden");
-
+  // carregar dados salvos
   document.getElementById("nome").value = localStorage.getItem("nome") || "";
   document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
   document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
 }
 
+function salvar() {
+  localStorage.setItem("nome", document.getElementById("nome").value);
+  localStorage.setItem("endereco", document.getElementById("endereco").value);
+  localStorage.setItem("telefone", document.getElementById("telefone").value);
+
+  alert("Dados salvos!");
+}
+
+// ==========================
+// SAIR (AGORA FUNCIONA)
+// ==========================
 function sair() {
-  localStorage.clear();
-  alert("Saiu!");
+  localStorage.removeItem("nome");
+  localStorage.removeItem("endereco");
+  localStorage.removeItem("telefone");
+
+  document.getElementById("form-cadastro").classList.add("hidden");
+
+  alert("Dados removidos!");
 }
