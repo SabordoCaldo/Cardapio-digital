@@ -33,9 +33,7 @@ function carregarInicio() {
     if (combo.disponivel) {
       html += `
         <div style="border:1px solid #ddd; padding:10px; border-radius:8px; margin-top:10px; display:flex; gap:10px;">
-          
           <img src="${combo.imagem}" style="width:70px; height:70px; border-radius:8px;">
-
           <div style="flex:1;">
             <strong>${combo.nome}</strong>
             <p style="font-size:12px;">${combo.descricao}</p>
