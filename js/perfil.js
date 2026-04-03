@@ -50,3 +50,15 @@ function carregarHistorico() {
 
   document.getElementById("historico").innerHTML = html;
 }
+
+function mostrarDadosCliente() {
+  const nome = localStorage.getItem("nome") || "Não informado";
+  const endereco = localStorage.getItem("endereco") || "Não informado";
+  const telefone = localStorage.getItem("telefone") || "Não informado";
+
+  document.getElementById("dados-cliente").innerHTML = `
+    <p><strong>Nome:</strong> ${nome}</p>
+    <p><strong>Endereço:</strong> ${endereco}</p>
+    <p><strong>Telefone:</strong> ${telefone}</p>
+  `;
+}
