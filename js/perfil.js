@@ -19,3 +19,28 @@ function sair() {
   localStorage.clear();
   trocarTela("inicio");
 }
+
+function carregarHistorico() {
+  const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+  let html = "<h3>📦 Últimos pedidos</h3>";
+
+  if (pedidos.length === 0) {
+    html += "<p>Nenhum pedido ainda</p>";
+  } else {
+    pedidos.slice(0, 5).forEach(p => {
+      html += `<div style="margin-bottom:10px;">`;
+      html += `<strong>${p.data}</strong><br>`;
+
+      for (let nome in p.itens) {
+        const item = p.itens[nome];
+        html += `${item.qtd}x ${nome}<br>`;
+      }
+
+      html += `<strong>Total: R$ ${p.total.toFixed(2)}</strong>`;
+      html += `</div><hr>`;
+    });
+  }
+
+  document.getElementById("historico").innerHTML = html;
+}
