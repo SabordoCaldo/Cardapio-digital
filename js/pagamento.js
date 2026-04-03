@@ -15,7 +15,7 @@ function irParaPagamento() {
 
   const tela = document.getElementById("carrinho");
 
-  tela.innerHTML = `
+  let html = `
     <h2>💳 Finalizar Pedido</h2>
 
     <p><strong>Nome:</strong> ${nome}</p>
@@ -36,7 +36,13 @@ function irParaPagamento() {
     <button onclick="finalizarPedido()" style="margin-top:15px;">
       Confirmar Pedido
     </button>
+
+    <button onclick="trocarTela('carrinho')" style="margin-top:10px;">
+      Voltar
+    </button>
   `;
+
+  tela.innerHTML = html;
 }
 
 // ==========================
@@ -57,7 +63,7 @@ function verificarPagamento() {
 }
 
 // ==========================
-// FINALIZAR PEDIDO (WHATSAPP)
+// FINALIZAR PEDIDO
 // ==========================
 function finalizarPedido() {
   const pagamento = document.getElementById("pagamento").value;
@@ -75,8 +81,20 @@ function finalizarPedido() {
     }
   }
 
-  let mensagem = "*PEDIDO*\n\n";
-  mensagem += "Itens:\n";
+  let mensagem = "*PEDIDO - SABOR DO CALDO*\n\n";
+
+  // ==========================
+  // DADOS DO CLIENTE
+  // ==========================
+  mensagem += "👤 Cliente:\n";
+  mensagem += `${localStorage.getItem("nome")}\n`;
+  mensagem += `${localStorage.getItem("telefone")}\n`;
+  mensagem += `${localStorage.getItem("endereco")}\n\n`;
+
+  // ==========================
+  // ITENS
+  // ==========================
+  mensagem += "🛒 Itens:\n";
 
   let resumo = {};
   let total = 0;
@@ -94,17 +112,37 @@ function finalizarPedido() {
     mensagem += `${item.qtd}x ${nome} - R$ ${(item.qtd * item.preco).toFixed(2)}\n`;
   }
 
-  mensagem += `\nTotal: R$ ${total.toFixed(2)}\n`;
-  mensagem += `Pagamento: ${pagamento}\n`;
+  mensagem += `\n💰 Total: R$ ${total.toFixed(2)}\n`;
+  mensagem += `💳 Pagamento: ${pagamento}\n`;
 
   if (pagamento === "dinheiro") {
-    mensagem += `Troco para: R$ ${trocoInput.value}\n`;
+    mensagem += `💵 Troco para: R$ ${trocoInput.value}\n`;
   }
 
-  // ✅ NÚMERO CORRETO (SEM +)
+  // ==========================
+  // SALVAR HISTÓRICO
+  // ==========================
+  let pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
+
+  pedidos.unshift({
+    data: new Date().toLocaleString(),
+    itens: resumo,
+    total: total
+  });
+
+  localStorage.setItem("pedidos", JSON.stringify(pedidos));
+
+  // ==========================
+  // WHATSAPP
+  // ==========================
   const numero = "5535999711358";
 
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
   window.open(url, "_blank");
+
+  // ==========================
+  // LIMPAR CARRINHO
+  // ==========================
+  carrinho = [];
 }
