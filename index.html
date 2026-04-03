@@ -10,9 +10,6 @@ HEAD
   <link rel="stylesheet" href="estilo.css">
 </head>
 
-<!-- ==========================
-BODY
-========================== -->
 <body>
 
 <!-- ==========================
@@ -24,27 +21,18 @@ TOPO
 </div>
 
 <!-- ==========================
-CATEGORIAS
-========================== -->
-<div class="categorias">
-  <button onclick="scrollToSection('combos')">Combos</button>
-  <button onclick="scrollToSection('caldos')">Caldos</button>
-  <button onclick="scrollToSection('bebidas')">Bebidas</button>
-</div>
-
-<!-- ==========================
-TELA INICIAL
+TELA INICIO
 ========================== -->
 <div id="tela-inicio" class="tela ativa">
 
-  <h2 id="combos">Combos</h2>
-  <div class="lista" id="lista-combos"></div>
+  <h2>Combos</h2>
+  <div class="scroll" id="lista-combos"></div>
 
-  <h2 id="caldos">Caldos</h2>
-  <div class="lista" id="lista-caldos"></div>
+  <h2>Caldos</h2>
+  <div class="scroll" id="lista-caldos"></div>
 
-  <h2 id="bebidas">Bebidas</h2>
-  <div class="lista" id="lista-bebidas"></div>
+  <h2>Bebidas</h2>
+  <div class="scroll" id="lista-bebidas"></div>
 
 </div>
 
@@ -80,9 +68,7 @@ TELA CARRINHO
 <div id="tela-carrinho" class="tela">
 
   <h2>🛒 Carrinho</h2>
-
   <div id="lista-carrinho"></div>
-
   <h3 id="total"></h3>
 
   <button onclick="limparCarrinho()">Limpar</button>
@@ -91,32 +77,48 @@ TELA CARRINHO
 </div>
 
 <!-- ==========================
-TELA CHECKOUT
+TELA PERFIL
 ========================== -->
-<div id="tela-checkout" class="tela">
+<div id="tela-perfil" class="tela">
 
-  <h2>Finalizar Pedido</h2>
+  <h2>Seus Dados</h2>
 
   <input id="nome" placeholder="Nome">
   <input id="endereco" placeholder="Endereço">
   <input id="telefone" placeholder="Telefone">
 
-  <select id="pagamento">
-    <option>Dinheiro</option>
-    <option>Pix</option>
-    <option>Cartão</option>
-  </select>
-
-  <input id="troco" placeholder="Troco para">
-
-  <button onclick="enviarPedidoWhatsApp()">Enviar Pedido</button>
-
 </div>
 
 <!-- ==========================
-BOTÃO CARRINHO
+BOTÃO SACOLA
 ========================== -->
-<button id="btn-carrinho" onclick="abrirCarrinho()">🛒</button>
+<div id="sacola" class="sacola" onclick="abrirCarrinho()" style="display:none;">
+  <span>Ver sacola</span>
+  <span id="total-sacola">R$ 0,00</span>
+</div>
+
+<!-- ==========================
+MENU INFERIOR
+========================== -->
+<div class="menu">
+
+  <button onclick="trocarTela('tela-inicio')">
+    🏠
+    <span>Início</span>
+  </button>
+
+  <button onclick="abrirCarrinho()" style="position:relative;">
+    🛒
+    <span>Carrinho</span>
+    <span id="badge" class="badge">0</span>
+  </button>
+
+  <button onclick="trocarTela('tela-perfil')">
+    👤
+    <span>Perfil</span>
+  </button>
+
+</div>
 
 <!-- ==========================
 SCRIPTS
