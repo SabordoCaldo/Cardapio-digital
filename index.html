@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<!-- ==========================
-HEAD
-========================== -->
 <head>
   <meta charset="UTF-8">
   <title>Sabor do Caldo</title>
@@ -12,17 +8,11 @@ HEAD
 
 <body>
 
-<!-- ==========================
-TOPO
-========================== -->
 <div class="topo">
   <h1>🔥 Sabor do Caldo</h1>
   <p>📍 Passos - MG</p>
 </div>
 
-<!-- ==========================
-TELA INICIO
-========================== -->
 <div id="tela-inicio" class="tela ativa">
 
   <h2>Combos</h2>
@@ -36,9 +26,6 @@ TELA INICIO
 
 </div>
 
-<!-- ==========================
-TELA ITEM
-========================== -->
 <div id="tela-item" class="tela">
 
   <button onclick="voltar()">⬅ Voltar</button>
@@ -62,67 +49,39 @@ TELA ITEM
 
 </div>
 
-<!-- ==========================
-TELA CARRINHO
-========================== -->
 <div id="tela-carrinho" class="tela">
-
   <h2>🛒 Carrinho</h2>
   <div id="lista-carrinho"></div>
   <h3 id="total"></h3>
 
   <button onclick="limparCarrinho()">Limpar</button>
   <button onclick="irCheckout()">Pedir</button>
-
 </div>
 
-<!-- ==========================
-TELA PERFIL
-========================== -->
 <div id="tela-perfil" class="tela">
-
   <h2>Seus Dados</h2>
 
   <input id="nome" placeholder="Nome">
   <input id="endereco" placeholder="Endereço">
   <input id="telefone" placeholder="Telefone">
-
 </div>
 
-<!-- ==========================
-BOTÃO SACOLA
-========================== -->
 <div id="sacola" class="sacola" onclick="abrirCarrinho()" style="display:none;">
   <span>Ver sacola</span>
   <span id="total-sacola">R$ 0,00</span>
 </div>
 
-<!-- ==========================
-MENU INFERIOR
-========================== -->
 <div class="menu">
-
-  <button onclick="trocarTela('tela-inicio')">
-    🏠
-    <span>Início</span>
-  </button>
+  <button onclick="trocarTela('tela-inicio')">🏠<span>Início</span></button>
 
   <button onclick="abrirCarrinho()" style="position:relative;">
-    🛒
-    <span>Carrinho</span>
+    🛒<span>Carrinho</span>
     <span id="badge" class="badge">0</span>
   </button>
 
-  <button onclick="trocarTela('tela-perfil')">
-    👤
-    <span>Perfil</span>
-  </button>
-
+  <button onclick="trocarTela('tela-perfil')">👤<span>Perfil</span></button>
 </div>
 
-<!-- ==========================
-SCRIPTS
-========================== -->
 <script src="caldos.js"></script>
 <script src="bebidas.js"></script>
 <script src="combos.js"></script>
