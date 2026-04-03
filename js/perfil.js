@@ -16,8 +16,13 @@ function salvar() {
 }
 
 function sair() {
-  localStorage.clear();
-  trocarTela("inicio");
+  const confirmar = confirm("Deseja realmente limpar seus dados?");
+
+  if (confirmar) {
+    localStorage.clear();
+    alert("Dados apagados!");
+    trocarTela("inicio");
+  }
 }
 
 // ==========================
