@@ -10,19 +10,10 @@
 
 <body>
 
-<!-- ==========================
-INICIO
-========================== -->
 <div id="inicio" class="tela ativa"></div>
 
-<!-- ==========================
-CARRINHO
-========================== -->
 <div id="carrinho" class="tela"></div>
 
-<!-- ==========================
-PERFIL
-========================== -->
 <div id="perfil" class="tela">
 
   <h2>👤 Perfil</h2>
@@ -41,11 +32,7 @@ PERFIL
 
 </div>
 
-<!-- ==========================
-DADOS DO CLIENTE
-========================== -->
 <div id="dados" class="tela">
-
   <h2>📋 Dados do Cliente</h2>
 
   <div class="form">
@@ -55,34 +42,14 @@ DADOS DO CLIENTE
 
     <button onclick="salvar()">Salvar</button>
   </div>
-
 </div>
 
-<!-- ==========================
-MENU
-========================== -->
 <div class="menu">
-
-  <button onclick="trocarTela('inicio')">
-    🏠
-    <span>Início</span>
-  </button>
-
-  <button onclick="trocarTela('carrinho')">
-    🛒
-    <span>Carrinho</span>
-  </button>
-
-  <button onclick="trocarTela('perfil')">
-    👤
-    <span>Perfil</span>
-  </button>
-
+  <button onclick="trocarTela('inicio')">🏠<span>Início</span></button>
+  <button onclick="trocarTela('carrinho')">🛒<span>Carrinho</span></button>
+  <button onclick="trocarTela('perfil')">👤<span>Perfil</span></button>
 </div>
 
-<!-- ==========================
-SCRIPTS (ORDEM IMPORTANTE)
-========================== -->
 <script src="js/produtos.js"></script>
 <script src="js/carrinho.js"></script>
 <script src="js/pagamento.js"></script>
