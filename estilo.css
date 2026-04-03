@@ -8,12 +8,23 @@ body {
 }
 
 /* ==========================
-   TOPO
+   TOPO (AGORA VERMELHO)
 ========================== */
 .topo {
   text-align: center;
-  padding: 15px;
-  background: white;
+  padding: 18px;
+  background: red;
+  color: white;
+}
+
+.topo h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.topo p {
+  margin: 5px 0 0;
+  font-size: 14px;
 }
 
 /* ==========================
@@ -21,7 +32,7 @@ body {
 ========================== */
 .tela {
   display: none;
-  padding-bottom: 140px;
+  padding-bottom: 160px;
 }
 
 .ativa {
@@ -46,10 +57,10 @@ h2 {
 }
 
 /* ==========================
-   CARD GRANDE (ESTILO APP)
+   CARD GRANDE
 ========================== */
 .card {
-  min-width: 280px;   /* AQUI É O SEGREDO */
+  min-width: 280px;
   max-width: 280px;
   background: white;
   border-radius: 16px;
@@ -57,7 +68,6 @@ h2 {
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
-/* IMAGEM GRANDE */
 .card img {
   width: 100%;
   height: 160px;
@@ -66,7 +76,6 @@ h2 {
   background: #eee;
 }
 
-/* TEXTO */
 .card h3 {
   font-size: 16px;
   margin: 10px 0 5px;
@@ -103,7 +112,7 @@ button {
 ========================== */
 .fixo {
   position: fixed;
-  bottom: 60px;
+  bottom: 70px;
   width: 100%;
   display: flex;
 }
@@ -111,31 +120,33 @@ button {
 .fixo button {
   flex: 1;
   border-radius: 0;
+  font-size: 16px;
 }
 
 /* ==========================
-   SACOLA (VER SACOLA)
+   SACOLA
 ========================== */
 .sacola {
   position: fixed;
-  bottom: 60px;
+  bottom: 70px;
   width: 100%;
   background: red;
   color: white;
-  padding: 15px;
+  padding: 18px;
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+  font-size: 16px;
 }
 
 /* ==========================
-   MENU INFERIOR
+   MENU INFERIOR (MAIOR)
 ========================== */
 .menu {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 60px;
+  height: 75px; /* AUMENTADO */
   display: flex;
   background: white;
   border-top: 1px solid #ddd;
@@ -144,11 +155,12 @@ button {
 .menu button {
   flex: 1;
   background: none;
-  color: #666;
-  font-size: 12px;
+  color: #444;
+  font-size: 14px; /* maior */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 /* ==========================
@@ -162,7 +174,7 @@ button {
   color: white;
   border-radius: 50%;
   font-size: 10px;
-  padding: 3px 6px;
+  padding: 4px 7px;
 }
 
 /* ==========================
