@@ -4,7 +4,9 @@ function trocarTela(id) {
 
   if (id === "inicio") carregarInicio();
   if (id === "carrinho") carregarCarrinho();
-  if (id === "perfil") carregarHistorico();
+  if (id === "perfil") {
+  carregarHistorico();
+  mostrarDadosCliente();
 }
 
 carregarInicio();
