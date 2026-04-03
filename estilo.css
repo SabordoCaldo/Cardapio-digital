@@ -12,7 +12,7 @@ body {
 ========================== */
 .topo {
   text-align: center;
-  padding: 15px 10px;
+  padding: 15px;
   background: white;
 }
 
@@ -21,7 +21,7 @@ body {
 ========================== */
 .tela {
   display: none;
-  padding-bottom: 130px;
+  padding-bottom: 140px;
 }
 
 .ativa {
@@ -29,14 +29,14 @@ body {
 }
 
 /* ==========================
-   TÍTULOS
+   TITULOS
 ========================== */
 h2 {
-  margin: 15px;
+  margin: 20px 15px 10px;
 }
 
 /* ==========================
-   LISTA HORIZONTAL
+   SCROLL HORIZONTAL
 ========================== */
 .scroll {
   display: flex;
@@ -46,37 +46,35 @@ h2 {
 }
 
 /* ==========================
-   CARD ESTILO IFOOD
+   CARD GRANDE (ESTILO APP)
 ========================== */
 .card {
-  min-width: 220px;
-  max-width: 220px;
+  min-width: 280px;   /* AQUI É O SEGREDO */
+  max-width: 280px;
   background: white;
   border-radius: 16px;
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
 /* IMAGEM GRANDE */
 .card img {
   width: 100%;
-  height: 140px;
+  height: 160px;
   object-fit: cover;
   border-radius: 12px;
   background: #eee;
 }
 
-/* NOME */
+/* TEXTO */
 .card h3 {
-  font-size: 15px;
+  font-size: 16px;
   margin: 10px 0 5px;
 }
 
-/* PREÇO */
 .card p {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: bold;
-  color: #333;
 }
 
 /* ==========================
@@ -88,7 +86,6 @@ button {
   border: none;
   padding: 12px;
   border-radius: 10px;
-  font-size: 14px;
 }
 
 /* ==========================
@@ -102,7 +99,7 @@ button {
 }
 
 /* ==========================
-   BOTÕES FIXOS (ITEM)
+   BOTÕES FIXOS ITEM
 ========================== */
 .fixo {
   position: fixed;
@@ -114,6 +111,21 @@ button {
 .fixo button {
   flex: 1;
   border-radius: 0;
+}
+
+/* ==========================
+   SACOLA (VER SACOLA)
+========================== */
+.sacola {
+  position: fixed;
+  bottom: 60px;
+  width: 100%;
+  background: red;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
 }
 
 /* ==========================
@@ -137,21 +149,6 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* ==========================
-   SACOLA (VER SACOLA)
-========================== */
-.sacola {
-  position: fixed;
-  bottom: 60px;
-  width: 100%;
-  background: red;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
 }
 
 /* ==========================
