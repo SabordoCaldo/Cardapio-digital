@@ -8,24 +8,33 @@
 
 <body>
 
+<!-- ==========================
+     TOPO
+========================== -->
 <div class="topo">
   <h1>🔥 Sabor do Caldo</h1>
   <p>📍 Passos - MG</p>
 </div>
 
+<!-- ==========================
+     INICIO
+========================== -->
 <div id="tela-inicio" class="tela ativa">
 
   <h2>Combos</h2>
-  <div class="scroll" id="lista-combos"></div>
+  <div class="lista" id="lista-combos"></div>
 
   <h2>Caldos</h2>
-  <div class="scroll" id="lista-caldos"></div>
+  <div class="lista" id="lista-caldos"></div>
 
   <h2>Bebidas</h2>
-  <div class="scroll" id="lista-bebidas"></div>
+  <div class="lista" id="lista-bebidas"></div>
 
 </div>
 
+<!-- ==========================
+     ITEM
+========================== -->
 <div id="tela-item" class="tela">
 
   <button onclick="voltar()">⬅ Voltar</button>
@@ -49,6 +58,9 @@
 
 </div>
 
+<!-- ==========================
+     CARRINHO
+========================== -->
 <div id="tela-carrinho" class="tela">
   <h2>🛒 Carrinho</h2>
   <div id="lista-carrinho"></div>
@@ -58,6 +70,9 @@
   <button onclick="irCheckout()">Pedir</button>
 </div>
 
+<!-- ==========================
+     PERFIL
+========================== -->
 <div id="tela-perfil" class="tela">
   <h2>Seus Dados</h2>
 
@@ -66,11 +81,17 @@
   <input id="telefone" placeholder="Telefone">
 </div>
 
+<!-- ==========================
+     SACOLA
+========================== -->
 <div id="sacola" class="sacola" onclick="abrirCarrinho()" style="display:none;">
   <span>Ver sacola</span>
   <span id="total-sacola">R$ 0,00</span>
 </div>
 
+<!-- ==========================
+     MENU
+========================== -->
 <div class="menu">
   <button onclick="trocarTela('tela-inicio')">🏠<span>Início</span></button>
 
