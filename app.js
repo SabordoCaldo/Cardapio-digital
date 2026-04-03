@@ -15,73 +15,6 @@ function trocarTela(id) {
 }
 
 // ==========================
-// BLOQUEAR CAMPOS
-// ==========================
-function bloquearCampos(bloquear) {
-  document.getElementById("nome").readOnly = bloquear;
-  document.getElementById("endereco").readOnly = bloquear;
-  document.getElementById("telefone").readOnly = bloquear;
-
-  const botao = document.querySelector(".form button");
-  botao.style.display = bloquear ? "none" : "block";
-}
-
-// ==========================
-// ABRIR DADOS
-// ==========================
-function abrirDados() {
-  trocarTela("dados");
-
-  document.getElementById("nome").value = localStorage.getItem("nome") || "";
-  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
-  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
-
-  const temDados = localStorage.getItem("nome");
-
-  if (temDados) {
-    bloquearCampos(true);
-  } else {
-    bloquearCampos(false);
-  }
-}
-
-// ==========================
-// SALVAR
-// ==========================
-function salvar() {
-  localStorage.setItem("nome", document.getElementById("nome").value);
-  localStorage.setItem("endereco", document.getElementById("endereco").value);
-  localStorage.setItem("telefone", document.getElementById("telefone").value);
-
-  alert("Dados salvos!");
-
-  trocarTela("perfil");
-}
-
-// ==========================
-// EDITAR PERFIL
-// ==========================
-function editarPerfil() {
-  trocarTela("dados");
-
-  document.getElementById("nome").value = localStorage.getItem("nome") || "";
-  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
-  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
-
-  bloquearCampos(false);
-}
-
-// ==========================
-// SAIR
-// ==========================
-function sair() {
-  localStorage.clear();
-  alert("Saiu!");
-
-  trocarTela("inicio");
-}
-
-// ==========================
 // COMBOS
 // ==========================
 const COMBOS = [
@@ -103,7 +36,7 @@ let carrinho = [];
 let quantidades = {};
 
 // ==========================
-// CARREGAR INÍCIO
+// CARREGAR INICIO
 // ==========================
 function carregarInicio() {
   const inicio = document.getElementById("inicio");
@@ -134,8 +67,13 @@ function carregarInicio() {
             <div style="display:flex; align-items:center; gap:10px;">
               <button onclick="removerItem(${combo.id})">➖</button>
               <span id="qtd-${combo.id}">0</span>
-              <button onclick="adicionarItem(${combo.id})">➕</button>
+              <button onclick="adicionarQtd(${combo.id})">➕</button>
             </div>
+
+            <button onclick="adicionarAoCarrinho(${combo.id})" style="margin-top:5px;">
+              Adicionar ao carrinho
+            </button>
+
           </div>
 
         </div>
@@ -149,43 +87,83 @@ function carregarInicio() {
 }
 
 // ==========================
-// ADICIONAR
+// ➕ ADICIONAR QTD
 // ==========================
-function adicionarItem(id) {
-  const item = COMBOS.find(c => c.id === id);
-
-  carrinho.push({
-    nome: item.nome,
-    preco: item.preco
-  });
-
+function adicionarQtd(id) {
   quantidades[id] = (quantidades[id] || 0) + 1;
+  atualizarQtd(id);
+}
+
+// ==========================
+// ➖ REMOVER QTD
+// ==========================
+function removerItem(id) {
+  quantidades[id] = (quantidades[id] || 0) - 1;
+
+  if (quantidades[id] < 0) {
+    quantidades[id] = 0;
+  }
 
   atualizarQtd(id);
 }
 
 // ==========================
-// REMOVER
+// ATUALIZAR QTD NA TELA
 // ==========================
-function removerItem(id) {
-  const item = COMBOS.find(c => c.id === id);
-
-  const index = carrinho.findIndex(i => i.nome === item.nome);
-
-  if (index !== -1) {
-    carrinho.splice(index, 1);
-    quantidades[id]--;
-
-    if (quantidades[id] < 0) quantidades[id] = 0;
-
-    atualizarQtd(id);
+function atualizarQtd(id) {
+  const el = document.getElementById(`qtd-${id}`);
+  if (el) {
+    el.innerText = quantidades[id] || 0;
   }
 }
 
 // ==========================
-// ATUALIZAR QTD
+// ADICIONAR AO CARRINHO
 // ==========================
-function atualizarQtd(id) {
-  const el = document.getElementById(`qtd-${id}`);
-  if (el) el.innerText = quantidades[id] || 0;
-                }
+function adicionarAoCarrinho(id) {
+  const item = COMBOS.find(c => c.id === id);
+  const qtd = quantidades[id] || 0;
+
+  if (qtd === 0) {
+    alert("Escolha a quantidade!");
+    return;
+  }
+
+  for (let i = 0; i < qtd; i++) {
+    carrinho.push({
+      nome: item.nome,
+      preco: item.preco
+    });
+  }
+
+  alert("Item adicionado ao carrinho!");
+
+  // resetar quantidade
+  quantidades[id] = 0;
+  atualizarQtd(id);
+}
+
+// ==========================
+// CARREGAR CARRINHO
+// ==========================
+function carregarCarrinho() {
+  const tela = document.getElementById("carrinho");
+
+  let html = `<h2>🛒 Carrinho</h2>`;
+
+  let total = 0;
+
+  carrinho.forEach(item => {
+    html += `<p>${item.nome} - R$ ${item.preco.toFixed(2)}</p>`;
+    total += item.preco;
+  });
+
+  html += `<h3>Total: R$ ${total.toFixed(2)}</h3>`;
+
+  tela.innerHTML = html;
+}
+
+// ==========================
+// INICIAR
+// ==========================
+carregarInicio();
