@@ -108,7 +108,7 @@ function removerItem(id) {
 }
 
 // ==========================
-// ATUALIZAR QTD NA TELA
+// ATUALIZAR QTD
 // ==========================
 function atualizarQtd(id) {
   const el = document.getElementById(`qtd-${id}`);
@@ -143,7 +143,7 @@ function adicionarAoCarrinho(id) {
 }
 
 // ==========================
-// 🛒 CARREGAR CARRINHO (AJUSTADO)
+// 🛒 CARREGAR CARRINHO
 // ==========================
 function carregarCarrinho() {
   const tela = document.getElementById("carrinho");
@@ -187,7 +187,7 @@ function carregarCarrinho() {
 }
 
 // ==========================
-// 💳 IR PARA PAGAMENTO
+// 💳 PAGAMENTO
 // ==========================
 function irParaPagamento() {
   const tela = document.getElementById("carrinho");
@@ -284,7 +284,7 @@ function finalizarPedido() {
     mensagem += `Troco para: R$ ${trocoInput.value}\n`;
   }
 
-  const numero = "5599999999999"; // coloque seu número
+  const numero = "5599999999999";
 
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
@@ -292,12 +292,7 @@ function finalizarPedido() {
 }
 
 // ==========================
-// INICIAR
-// ==========================
-carregarInicio();
-
-// ==========================
-// PERFIL (GARANTIR FUNÇÕES)
+// 👤 PERFIL (CORRIGIDO)
 // ==========================
 function editarPerfil() {
   trocarTela("dados");
@@ -321,3 +316,8 @@ function sair() {
   alert("Saiu!");
   trocarTela("inicio");
 }
+
+// ==========================
+// INICIAR
+// ==========================
+carregarInicio();
