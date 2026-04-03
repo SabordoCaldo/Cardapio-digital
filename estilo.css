@@ -1,84 +1,103 @@
+/* ==========================
+GERAL
+========================== */
 body {
   font-family: Arial;
   margin: 0;
-  background: #ffffff;
-  max-width: 500px;
-  margin: auto;
+  background: #fff;
 }
 
-h1 {
+/* ==========================
+TOPO
+========================== */
+.topo {
   text-align: center;
-  color: red;
-}
-
-h2 {
-  text-align: center;
-  color: red;
-  margin-top: 20px;
-}
-
-p {
-  text-align: center;
-}
-
-/* TELAS */
-.tela {
-  display: none;
   padding: 10px;
 }
 
-.ativa {
-  display: block;
-}
-
-/* LISTAS */
-.scroll {
+/* ==========================
+CATEGORIAS
+========================== */
+.categorias {
   display: flex;
   overflow-x: auto;
   gap: 10px;
   padding: 10px;
 }
 
-/* CARDS */
+.categorias button {
+  background: #eee;
+  color: #000;
+  border-radius: 20px;
+  padding: 8px 15px;
+}
+
+/* ==========================
+LISTA DE PRODUTOS
+========================== */
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+/* ==========================
+CARD
+========================== */
 .card {
-  min-width: 160px;
-  background: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .card img {
-  width: 100%;
-  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
 }
 
-/* BOTÕES */
+/* ==========================
+TELAS
+========================== */
+.tela {
+  display: none;
+}
+
+.ativa {
+  display: block;
+}
+
+/* ==========================
+BOTÕES
+========================== */
 button {
   background: red;
   color: white;
   border: none;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
-  font-size: 16px;
-  margin: 5px;
 }
 
-/* QUANTIDADE */
+/* ==========================
+QUANTIDADE
+========================== */
 .quantidade {
   display: flex;
   justify-content: center;
   gap: 10px;
-  margin-top: 10px;
+  margin: 10px;
 }
 
-/* BOTÕES FIXOS */
+/* ==========================
+BOTÕES FIXOS
+========================== */
 .fixo {
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
   display: flex;
 }
@@ -87,7 +106,25 @@ button {
   flex: 1;
 }
 
-/* CARRINHO */
-#lista-carrinho {
+/* ==========================
+BOTÃO CARRINHO
+========================== */
+#btn-carrinho {
+  position: fixed;
+  bottom: 80px;
+  right: 15px;
+  background: red;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+/* ==========================
+FORMULÁRIOS
+========================== */
+input, select {
+  width: 90%;
   padding: 10px;
+  margin: 5px auto;
+  display: block;
 }
