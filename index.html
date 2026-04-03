@@ -11,46 +11,39 @@
 <body>
 
 <!-- ==========================
-INICIO
+TELA INÍCIO
 ========================== -->
 <div id="inicio" class="tela ativa">
+
   <div class="topo">
     <div class="logo"></div>
     <h1>Sabor do Caldo</h1>
     <p>Passos - MG</p>
   </div>
+
 </div>
 
 <!-- ==========================
-CARRINHO
+TELA CARRINHO
 ========================== -->
 <div id="carrinho" class="tela">
   <h2>🛒 Carrinho</h2>
 </div>
 
 <!-- ==========================
-PERFIL
+TELA PERFIL
 ========================== -->
 <div id="perfil" class="tela">
 
   <h2>👤 Perfil</h2>
 
   <div class="card-perfil">
-    <button onclick="trocarTela('dados')">Dados do Cliente</button>
-    <button onclick="editarPerfil()">Editar Perfil</button>
+    <button onclick="abrirCadastro()">Dados do Cliente</button>
     <button onclick="sair()">Sair</button>
   </div>
 
-</div>
-
-<!-- ==========================
-DADOS DO CLIENTE (NOVA TELA)
-========================== -->
-<div id="dados" class="tela">
-
-  <h2>📋 Dados do Cliente</h2>
-
-  <div class="form">
+  <!-- FORM -->
+  <div id="form-cadastro" class="form hidden">
     <input id="nome" placeholder="Nome">
     <input id="endereco" placeholder="Endereço">
     <input id="telefone" placeholder="Telefone">
@@ -61,7 +54,7 @@ DADOS DO CLIENTE (NOVA TELA)
 </div>
 
 <!-- ==========================
-MENU
+MENU INFERIOR
 ========================== -->
 <div class="menu">
 
