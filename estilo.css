@@ -1,130 +1,122 @@
-/* ==========================
-   BASE
-========================== */
-body {
-  font-family: Arial;
+/* RESET */
+* {
   margin: 0;
-  background: #f7f7f7;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: white;
 }
 
 /* ==========================
-   TOPO
-========================== */
-.topo {
-  background: red;
-  color: white;
-  text-align: center;
-  padding: 15px;
-}
-
-/* ==========================
-   TELAS
+TELAS
 ========================== */
 .tela {
   display: none;
-  padding-bottom: 140px;
+  padding: 20px;
 }
 
-.ativa {
+.tela.ativa {
   display: block;
 }
 
 /* ==========================
-   LISTA (IFOOD)
+TOPO (LOGO + NOME)
 ========================== */
-.lista {
-  padding: 10px;
+.topo {
+  text-align: center;
+  margin-top: 40px;
 }
 
-/* ITEM */
-.item {
-  display: flex;
-  background: white;
-  border-radius: 12px;
-  padding: 10px;
-  margin-bottom: 12px;
-  align-items: center;
+.logo {
+  width: 120px;
+  height: 120px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 15px;
 }
 
-/* IMAGEM */
-.item img {
-  width: 90px;
-  height: 90px;
-  border-radius: 10px;
-  object-fit: cover;
-  background: #eee;
+.topo h1 {
+  font-size: 22px;
 }
 
-/* TEXTO */
-.info {
-  flex: 1;
-  margin-left: 10px;
-}
-
-.info h3 {
-  margin: 0;
-  font-size: 15px;
-}
-
-.info p {
-  margin: 5px 0;
-  font-size: 13px;
+.topo p {
   color: #666;
 }
 
-.preco {
-  font-weight: bold;
-}
-
-/* BOTÃO ADD */
-.add {
-  background: red;
-  color: white;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  font-size: 20px;
-}
-
 /* ==========================
-   SACOLA
-========================== */
-.sacola {
-  position: fixed;
-  bottom: 70px;
-  width: 100%;
-  background: red;
-  color: white;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
-
-/* ==========================
-   MENU
+MENU INFERIOR
 ========================== */
 .menu {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 70px;
+  background: #fff;
+  border-top: 1px solid #ddd;
   display: flex;
-  background: white;
+  justify-content: space-around;
+  padding: 10px 0;
 }
 
 .menu button {
-  flex: 1;
-  border: none;
   background: none;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ==========================
-   INPUT
+CARRINHO
 ========================== */
-input {
-  width: 90%;
+#carrinho {
+  background: white;
+}
+
+/* ==========================
+PERFIL
+========================== */
+.card-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 40px;
+}
+
+.card-perfil button {
+  padding: 12px;
+  border: none;
+  background: #e30613;
+  color: white;
+  border-radius: 8px;
+}
+
+/* FORM */
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form input {
   padding: 10px;
-  margin: 5px auto;
-  display: block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form button {
+  background: green;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* OCULTO */
+.hidden {
+  display: none;
 }
