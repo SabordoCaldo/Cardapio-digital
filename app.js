@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================
-// TELAS
+// NAVEGAÇÃO
 // ==========================
 function trocarTela(id) {
   document.querySelectorAll(".tela").forEach(t => t.classList.remove("ativa"));
@@ -28,7 +28,16 @@ function voltar() {
 }
 
 // ==========================
-// CARDS
+// SCROLL (CATEGORIAS)
+// ==========================
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({
+    behavior: "smooth"
+  });
+}
+
+// ==========================
+// CRIAR CARD
 // ==========================
 function criarCard(item) {
   const div = document.createElement("div");
@@ -36,8 +45,10 @@ function criarCard(item) {
 
   div.innerHTML = `
     <img src="${item.imagem}">
-    <h3>${item.nome}</h3>
-    <p>R$ ${item.preco.toFixed(2)}</p>
+    <div>
+      <h3>${item.nome}</h3>
+      <p>R$ ${item.preco.toFixed(2)}</p>
+    </div>
   `;
 
   div.addEventListener("click", () => abrirItem(item));
@@ -46,11 +57,12 @@ function criarCard(item) {
 }
 
 // ==========================
-// LISTAS
+// RENDER LISTAS
 // ==========================
 function renderCombos() {
   const c = document.getElementById("lista-combos");
   if (!c) return;
+
   c.innerHTML = "";
   COMBOS.forEach(i => c.appendChild(criarCard(i)));
 }
@@ -68,7 +80,7 @@ function renderBebidas() {
 }
 
 // ==========================
-// ITEM
+// ABRIR ITEM
 // ==========================
 function abrirItem(item) {
   itemAtual = item;
@@ -131,28 +143,38 @@ function renderAdicionais() {
 
 function maisAdicional(id) {
   adicionaisSelecionados[id] = (adicionaisSelecionados[id] || 0) + 1;
-  atualizar(id);
+  atualizarAdicional(id);
 }
 
 function menosAdicional(id) {
   if (!adicionaisSelecionados[id]) return;
   adicionaisSelecionados[id]--;
-  atualizar(id);
+  atualizarAdicional(id);
 }
 
-function atualizar(id) {
+function atualizarAdicional(id) {
   document.getElementById("add-" + id).innerText = adicionaisSelecionados[id] || 0;
 }
 
 // ==========================
-// CARRINHO
+// ADICIONAR AO CARRINHO
 // ==========================
 function addCarrinho() {
+  let adicionais = [];
   let total = itemAtual.preco * quantidade;
+
+  for (let id in adicionaisSelecionados) {
+    const a = ADICIONAIS_CALDOS.find(x => x.id == id);
+    const qtd = adicionaisSelecionados[id];
+
+    adicionais.push({ nome: a.nome, qtd, preco: a.preco });
+    total += a.preco * qtd;
+  }
 
   carrinho.push({
     nome: itemAtual.nome,
     quantidade,
+    adicionais,
     total
   });
 
@@ -160,6 +182,9 @@ function addCarrinho() {
   trocarTela("tela-inicio");
 }
 
+// ==========================
+// CARRINHO
+// ==========================
 function abrirCarrinho() {
   renderCarrinho();
   trocarTela("tela-carrinho");
@@ -178,8 +203,16 @@ function renderCarrinho() {
   let total = 0;
 
   carrinho.forEach(item => {
+    let html = `<b>${item.quantidade}x ${item.nome}</b><br>`;
+
+    item.adicionais.forEach(a => {
+      html += `+ ${a.qtd}x ${a.nome}<br>`;
+    });
+
+    html += "<hr>";
+
     const div = document.createElement("div");
-    div.innerText = `${item.quantidade}x ${item.nome}`;
+    div.innerHTML = html;
     c.appendChild(div);
 
     total += item.total;
@@ -206,15 +239,32 @@ function irCheckout() {
 // WHATSAPP
 // ==========================
 function enviarPedidoWhatsApp() {
-  let texto = "Pedido:\n\n";
+  let texto = "🧾 Pedido - Sabor do Caldo\n\n";
   let total = 0;
 
   carrinho.forEach(item => {
     texto += `${item.quantidade}x ${item.nome}\n`;
+
+    item.adicionais.forEach(a => {
+      texto += `+ ${a.qtd}x ${a.nome}\n`;
+    });
+
+    texto += "\n";
     total += item.total;
   });
 
-  texto += `\nTotal: R$ ${total.toFixed(2)}\n`;
+  texto += `💰 Total: R$ ${total.toFixed(2)}\n\n`;
+
+  texto += `👤 Nome: ${document.getElementById("nome").value}\n`;
+  texto += `📍 Endereço: ${document.getElementById("endereco").value}\n`;
+  texto += `📞 Telefone: ${document.getElementById("telefone").value}\n`;
+
+  const pag = document.getElementById("pagamento").value;
+  texto += `💳 Pagamento: ${pag}\n`;
+
+  if (pag === "Dinheiro") {
+    texto += `💵 Troco: ${document.getElementById("troco").value}\n`;
+  }
 
   window.open(`https://wa.me/5535999711358?text=${encodeURIComponent(texto)}`);
-    }
+}
