@@ -27,7 +27,7 @@ function finalizarPedido() {
   mensagem += `\nTotal: R$ ${total.toFixed(2)}\n`;
   mensagem += `Pagamento: ${pagamento}\n`;
 
-  const numero = "5599999999999"; // SEU NUMERO
+  const numero = "5535999711358"; // SEU NUMERO
 
   const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
 
