@@ -1,0 +1,106 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+body {
+  background: white;
+}
+
+/* TELAS */
+.tela {
+  display: none;
+  padding: 20px;
+}
+
+.tela.ativa {
+  display: block;
+}
+
+/* TOPO */
+.topo {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+}
+
+.topo h1 {
+  font-size: 22px;
+}
+
+.topo p {
+  color: #666;
+}
+
+/* MENU */
+.menu {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.menu button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* PERFIL */
+.card-perfil {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.card-perfil button {
+  padding: 12px;
+  border: none;
+  background: #e30613;
+  color: white;
+  border-radius: 8px;
+}
+
+/* FORM */
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form button {
+  background: green;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
