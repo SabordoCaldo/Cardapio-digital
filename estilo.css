@@ -1,81 +1,93 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<title>Sabor do Caldo</title>
-<link rel="stylesheet" href="estilo.css">
-</head>
-<body>
+body {
+  font-family: Arial;
+  margin: 0;
+  background: #ffffff;
+  max-width: 500px;
+  margin: auto;
+}
 
-<div id="tela-inicio" class="tela ativa">
-  <h1>🔥 Sabor do Caldo</h1>
-  <p>📍 Passos - MG</p>
+h1 {
+  text-align: center;
+  color: red;
+}
 
-  <h2>Combos</h2>
-  <div class="scroll" id="lista-combos"></div>
+h2 {
+  text-align: center;
+  color: red;
+  margin-top: 20px;
+}
 
-  <h2>Caldos</h2>
-  <div class="scroll" id="lista-caldos"></div>
+p {
+  text-align: center;
+}
 
-  <h2>Bebidas</h2>
-  <div class="scroll" id="lista-bebidas"></div>
+/* TELAS */
+.tela {
+  display: none;
+  padding: 10px;
+}
 
-  <button onclick="abrirCarrinho()">🛒 Carrinho</button>
-</div>
+.ativa {
+  display: block;
+}
 
-<div id="tela-item" class="tela">
-  <button onclick="voltar()">⬅ Voltar</button>
+/* LISTAS */
+.scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding: 10px;
+}
 
-  <h2 id="item-nome"></h2>
-  <p id="item-desc"></p>
-  <p id="item-preco"></p>
+/* CARDS */
+.card {
+  min-width: 160px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-  <div id="adicionais"></div>
+.card img {
+  width: 100%;
+  border-radius: 8px;
+}
 
-  <div class="quantidade">
-    <button onclick="diminuir()">-</button>
-    <span id="qtd">1</span>
-    <button onclick="aumentar()">+</button>
-  </div>
+/* BOTÕES */
+button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  margin: 5px;
+}
 
-  <div class="fixo">
-    <button onclick="limparItem()">Limpar</button>
-    <button onclick="addCarrinho()">Adicionar</button>
-  </div>
-</div>
+/* QUANTIDADE */
+.quantidade {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
 
-<div id="tela-carrinho" class="tela">
-  <h2>🛒 Carrinho</h2>
-  <div id="lista-carrinho"></div>
-  <h3 id="total"></h3>
+/* BOTÕES FIXOS */
+.fixo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+}
 
-  <button onclick="limparCarrinho()">Limpar</button>
-  <button onclick="irCheckout()">Pedir</button>
-</div>
+.fixo button {
+  flex: 1;
+}
 
-<div id="tela-checkout" class="tela">
-  <h2>Finalizar Pedido</h2>
-
-  <input id="nome" placeholder="Nome"><br>
-  <input id="endereco" placeholder="Endereço"><br>
-  <input id="telefone" placeholder="Telefone"><br>
-
-  <select id="pagamento">
-    <option>Dinheiro</option>
-    <option>Pix</option>
-    <option>Cartão</option>
-  </select><br>
-
-  <input id="troco" placeholder="Troco para"><br>
-
-  <button onclick="enviarPedidoWhatsApp()">Enviar Pedido</button>
-</div>
-
-<script src="caldos.js"></script>
-<script src="bebidas.js"></script>
-<script src="combos.js"></script>
-<script src="adicionais-caldo.js"></script>
-<script src="app.js"></script>
-
-</body>
-</html>
+/* CARRINHO */
+#lista-carrinho {
+  padding: 10px;
+}
