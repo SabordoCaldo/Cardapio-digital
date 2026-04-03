@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCombos();
   renderCaldos();
   renderBebidas();
-
-  nome.value = localStorage.getItem("nome") || "";
-  endereco.value = localStorage.getItem("endereco") || "";
-  telefone.value = localStorage.getItem("telefone") || "";
 });
 
 function trocarTela(id) {
@@ -37,18 +33,21 @@ function criarCard(item) {
 }
 
 function renderCombos() {
-  lista_combos.innerHTML = "";
-  COMBOS.forEach(i => lista_combos.appendChild(criarCard(i)));
+  const c = document.getElementById("lista-combos");
+  c.innerHTML = "";
+  COMBOS.forEach(i => c.appendChild(criarCard(i)));
 }
 
 function renderCaldos() {
-  lista_caldos.innerHTML = "";
-  CALDOS.forEach(i => lista_caldos.appendChild(criarCard(i)));
+  const c = document.getElementById("lista-caldos");
+  c.innerHTML = "";
+  CALDOS.forEach(i => c.appendChild(criarCard(i)));
 }
 
 function renderBebidas() {
-  lista_bebidas.innerHTML = "";
-  BEBIDAS.forEach(i => lista_bebidas.appendChild(criarCard(i)));
+  const c = document.getElementById("lista-bebidas");
+  c.innerHTML = "";
+  BEBIDAS.forEach(i => c.appendChild(criarCard(i)));
 }
 
 function abrirItem(item) {
@@ -56,76 +55,30 @@ function abrirItem(item) {
   quantidade = 1;
   adicionaisSelecionados = {};
 
-  item_nome.innerText = item.nome;
-  item_desc.innerText = item.descricao || "";
-  item_preco.innerText = "R$ " + item.preco.toFixed(2);
-  qtd.innerText = quantidade;
-
-  if (item.tipo === "caldo") renderAdicionais();
-  else adicionais.innerHTML = "";
+  document.getElementById("item-nome").innerText = item.nome;
+  document.getElementById("item-desc").innerText = item.descricao || "";
+  document.getElementById("item-preco").innerText = "R$ " + item.preco.toFixed(2);
+  document.getElementById("qtd").innerText = quantidade;
 
   trocarTela("tela-item");
 }
 
 function aumentar() {
   quantidade++;
-  qtd.innerText = quantidade;
+  document.getElementById("qtd").innerText = quantidade;
 }
 
 function diminuir() {
   if (quantidade > 1) quantidade--;
-  qtd.innerText = quantidade;
-}
-
-function renderAdicionais() {
-  adicionais.innerHTML = "";
-
-  ADICIONAIS_CALDOS.forEach(a => {
-    const div = document.createElement("div");
-
-    div.innerHTML = `
-      ${a.nome} (+R$ ${a.preco})
-      <button onclick="menosAdicional(${a.id})">-</button>
-      <span id="add-${a.id}">0</span>
-      <button onclick="maisAdicional(${a.id})">+</button>
-    `;
-
-    adicionais.appendChild(div);
-  });
-}
-
-function maisAdicional(id) {
-  adicionaisSelecionados[id] = (adicionaisSelecionados[id] || 0) + 1;
-  atualizar(id);
-}
-
-function menosAdicional(id) {
-  if (!adicionaisSelecionados[id]) return;
-  adicionaisSelecionados[id]--;
-  atualizar(id);
-}
-
-function atualizar(id) {
-  document.getElementById("add-" + id).innerText = adicionaisSelecionados[id] || 0;
+  document.getElementById("qtd").innerText = quantidade;
 }
 
 function addCarrinho() {
-  let adicionaisArr = [];
-  let total = itemAtual.preco * quantidade;
-
-  for (let id in adicionaisSelecionados) {
-    const a = ADICIONAIS_CALDOS.find(x => x.id == id);
-    const qtdAdd = adicionaisSelecionados[id];
-
-    adicionaisArr.push({ nome: a.nome, qtd: qtdAdd });
-    total += a.preco * qtdAdd;
-  }
-
   carrinho.push({
     nome: itemAtual.nome,
     quantidade,
-    adicionais: adicionaisArr,
-    total
+    total: itemAtual.preco * quantidade,
+    adicionais: []
   });
 
   atualizarSacola();
@@ -136,9 +89,9 @@ function atualizarSacola() {
   const total = carrinho.reduce((s, i) => s + i.total, 0);
   const qtd = carrinho.length;
 
-  total_sacola.innerText = "R$ " + total.toFixed(2);
-  badge.innerText = qtd;
-  sacola.style.display = qtd > 0 ? "flex" : "none";
+  document.getElementById("total-sacola").innerText = "R$ " + total.toFixed(2);
+  document.getElementById("badge").innerText = qtd;
+  document.getElementById("sacola").style.display = qtd > 0 ? "flex" : "none";
 }
 
 function abrirCarrinho() {
@@ -153,21 +106,15 @@ function limparCarrinho() {
 }
 
 function renderCarrinho() {
-  lista_carrinho.innerHTML = "";
+  const lista = document.getElementById("lista-carrinho");
+  lista.innerHTML = "";
+
   let total = 0;
 
   carrinho.forEach(item => {
-    let html = `<b>${item.quantidade}x ${item.nome}</b><br>`;
-
-    item.adicionais.forEach(a => {
-      html += `+ ${a.qtd}x ${a.nome}<br>`;
-    });
-
-    html += "<hr>";
-
     const div = document.createElement("div");
-    div.innerHTML = html;
-    lista_carrinho.appendChild(div);
+    div.innerHTML = `${item.quantidade}x ${item.nome}`;
+    lista.appendChild(div);
 
     total += item.total;
   });
@@ -183,33 +130,5 @@ function irCheckout() {
     return;
   }
 
-  enviarPedidoWhatsApp();
+  window.open("https://wa.me/5535999711358");
 }
-
-function enviarPedidoWhatsApp() {
-  let texto = "Pedido:\n\n";
-  let total = 0;
-
-  carrinho.forEach(item => {
-    texto += `${item.quantidade}x ${item.nome}\n`;
-
-    item.adicionais.forEach(a => {
-      texto += `+ ${a.qtd}x ${a.nome}\n`;
-    });
-
-    texto += "\n";
-    total += item.total;
-  });
-
-  texto += `Total: R$ ${total.toFixed(2)}\n\n`;
-  texto += `Nome: ${nome.value}\n`;
-  texto += `Endereço: ${endereco.value}\n`;
-  texto += `Telefone: ${telefone.value}`;
-
-  window.open(`https://wa.me/5535999711358?text=${encodeURIComponent(texto)}`);
-}
-
-// salvar dados
-nome.oninput = () => localStorage.setItem("nome", nome.value);
-endereco.oninput = () => localStorage.setItem("endereco", endereco.value);
-telefone.oninput = () => localStorage.setItem("telefone", telefone.value);
