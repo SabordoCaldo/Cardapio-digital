@@ -1,70 +1,109 @@
+/* ==========================
+   RESET
+========================== */
 body {
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   margin: 0;
-  background: #fff;
+  background: #f7f7f7;
 }
 
+/* ==========================
+   TOPO
+========================== */
 .topo {
   text-align: center;
-  padding: 10px;
+  padding: 15px 10px;
+  background: white;
 }
 
+/* ==========================
+   TELAS
+========================== */
 .tela {
   display: none;
-  padding-bottom: 120px;
+  padding-bottom: 130px;
 }
 
 .ativa {
   display: block;
 }
 
+/* ==========================
+   TÍTULOS
+========================== */
+h2 {
+  margin: 15px;
+}
+
+/* ==========================
+   LISTA HORIZONTAL
+========================== */
 .scroll {
   display: flex;
   overflow-x: auto;
-  gap: 12px;
-  padding: 12px;
+  gap: 15px;
+  padding: 10px 15px;
 }
 
+/* ==========================
+   CARD ESTILO IFOOD
+========================== */
 .card {
-  min-width: 180px;
-  max-width: 180px;
-  background: #fff;
-  border-radius: 14px;
+  min-width: 220px;
+  max-width: 220px;
+  background: white;
+  border-radius: 16px;
   padding: 10px;
-  border: 1px solid #eee;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* IMAGEM GRANDE */
 .card img {
   width: 100%;
-  height: 120px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 12px;
+  background: #eee;
 }
 
+/* NOME */
 .card h3 {
-  font-size: 14px;
-  margin: 8px 0 4px;
+  font-size: 15px;
+  margin: 10px 0 5px;
 }
 
+/* PREÇO */
 .card p {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
+  color: #333;
 }
 
+/* ==========================
+   BOTÕES
+========================== */
 button {
   background: red;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
+/* ==========================
+   QUANTIDADE
+========================== */
 .quantidade {
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin: 15px 0;
 }
 
+/* ==========================
+   BOTÕES FIXOS (ITEM)
+========================== */
 .fixo {
   position: fixed;
   bottom: 60px;
@@ -74,28 +113,35 @@ button {
 
 .fixo button {
   flex: 1;
+  border-radius: 0;
 }
 
+/* ==========================
+   MENU INFERIOR
+========================== */
 .menu {
   position: fixed;
   bottom: 0;
   width: 100%;
-  display: flex;
-  background: #fff;
-  border-top: 1px solid #ddd;
   height: 60px;
+  display: flex;
+  background: white;
+  border-top: 1px solid #ddd;
 }
 
 .menu button {
   flex: 1;
   background: none;
-  color: #555;
+  color: #666;
   font-size: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* ==========================
+   SACOLA (VER SACOLA)
+========================== */
 .sacola {
   position: fixed;
   bottom: 60px;
@@ -105,8 +151,12 @@ button {
   padding: 15px;
   display: flex;
   justify-content: space-between;
+  font-weight: bold;
 }
 
+/* ==========================
+   BADGE
+========================== */
 .badge {
   position: absolute;
   top: 5px;
@@ -118,9 +168,14 @@ button {
   padding: 3px 6px;
 }
 
+/* ==========================
+   INPUTS
+========================== */
 input {
   width: 90%;
-  padding: 10px;
-  margin: 5px auto;
+  padding: 12px;
+  margin: 8px auto;
   display: block;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
