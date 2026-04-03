@@ -1,52 +1,58 @@
-// ==========================
-// TROCAR TELA
-// ==========================
 function trocarTela(id) {
   document.querySelectorAll(".tela").forEach(t => t.classList.remove("ativa"));
   document.getElementById(id).classList.add("ativa");
 }
 
-// ==========================
-// VER DADOS (SEM EDITAR)
-// ==========================
-function verDados() {
-  document.getElementById("ver-nome").innerText = localStorage.getItem("nome") || "Não informado";
-  document.getElementById("ver-endereco").innerText = localStorage.getItem("endereco") || "Não informado";
-  document.getElementById("ver-telefone").innerText = localStorage.getItem("telefone") || "Não informado";
+/* ABRIR DADOS */
+function abrirDados() {
+  const dados = JSON.parse(localStorage.getItem("cliente"));
 
-  trocarTela("dados");
+  const div = document.getElementById("dados-exibir");
+
+  if (dados) {
+    div.innerHTML = `
+      <p><b>Nome:</b> ${dados.nome}</p>
+      <p><b>Endereço:</b> ${dados.endereco}</p>
+      <p><b>Telefone:</b> ${dados.telefone}</p>
+    `;
+  } else {
+    div.innerHTML = "Nenhum dado cadastrado.";
+  }
+
+  trocarTela("tela-dados");
 }
 
-// ==========================
-// EDITAR
-// ==========================
+/* EDITAR */
 function editarPerfil() {
-  document.getElementById("nome").value = localStorage.getItem("nome") || "";
-  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
-  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+  const dados = JSON.parse(localStorage.getItem("cliente"));
 
-  trocarTela("editar");
+  if (dados) {
+    document.getElementById("nome").value = dados.nome;
+    document.getElementById("endereco").value = dados.endereco;
+    document.getElementById("telefone").value = dados.telefone;
+  }
+
+  trocarTela("tela-cadastro");
 }
 
-// ==========================
-// SALVAR
-// ==========================
-function salvar() {
-  localStorage.setItem("nome", document.getElementById("nome").value);
-  localStorage.setItem("endereco", document.getElementById("endereco").value);
-  localStorage.setItem("telefone", document.getElementById("telefone").value);
+/* SALVAR */
+function salvarDados() {
+  const dados = {
+    nome: document.getElementById("nome").value,
+    endereco: document.getElementById("endereco").value,
+    telefone: document.getElementById("telefone").value
+  };
+
+  localStorage.setItem("cliente", JSON.stringify(dados));
 
   alert("Dados salvos!");
 
-  trocarTela("dados");
+  trocarTela("tela-perfil");
 }
 
-// ==========================
-// SAIR
-// ==========================
+/* SAIR */
 function sair() {
-  localStorage.clear();
-  alert("Dados apagados!");
-
-  trocarTela("inicio");
+  localStorage.removeItem("cliente");
+  alert("Você saiu!");
+  trocarTela("tela-inicio");
 }
