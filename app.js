@@ -295,3 +295,29 @@ function finalizarPedido() {
 // INICIAR
 // ==========================
 carregarInicio();
+
+// ==========================
+// PERFIL (GARANTIR FUNÇÕES)
+// ==========================
+function editarPerfil() {
+  trocarTela("dados");
+
+  document.getElementById("nome").value = localStorage.getItem("nome") || "";
+  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
+  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+}
+
+function salvar() {
+  localStorage.setItem("nome", document.getElementById("nome").value);
+  localStorage.setItem("endereco", document.getElementById("endereco").value);
+  localStorage.setItem("telefone", document.getElementById("telefone").value);
+
+  alert("Dados salvos!");
+  trocarTela("perfil");
+}
+
+function sair() {
+  localStorage.clear();
+  alert("Saiu!");
+  trocarTela("inicio");
+}
