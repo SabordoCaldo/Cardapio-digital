@@ -1,23 +1,18 @@
-// ==========================
-// VARIÁVEIS
-// ==========================
 let itemAtual = null;
 let quantidade = 1;
 let adicionaisSelecionados = {};
 let carrinho = [];
 
-// ==========================
-// INICIAR
-// ==========================
 document.addEventListener("DOMContentLoaded", () => {
   renderCombos();
   renderCaldos();
   renderBebidas();
+
+  nome.value = localStorage.getItem("nome") || "";
+  endereco.value = localStorage.getItem("endereco") || "";
+  telefone.value = localStorage.getItem("telefone") || "";
 });
 
-// ==========================
-// NAVEGAÇÃO
-// ==========================
 function trocarTela(id) {
   document.querySelectorAll(".tela").forEach(t => t.classList.remove("ativa"));
   document.getElementById(id).classList.add("ativa");
@@ -27,105 +22,63 @@ function voltar() {
   trocarTela("tela-inicio");
 }
 
-// ==========================
-// SCROLL (CATEGORIAS)
-// ==========================
-function scrollToSection(id) {
-  document.getElementById(id).scrollIntoView({
-    behavior: "smooth"
-  });
-}
-
-// ==========================
-// CRIAR CARD
-// ==========================
 function criarCard(item) {
   const div = document.createElement("div");
   div.className = "card";
 
   div.innerHTML = `
     <img src="${item.imagem}">
-    <div>
-      <h3>${item.nome}</h3>
-      <p>R$ ${item.preco.toFixed(2)}</p>
-    </div>
+    <h3>${item.nome}</h3>
+    <p>R$ ${item.preco.toFixed(2)}</p>
   `;
 
-  div.addEventListener("click", () => abrirItem(item));
-
+  div.onclick = () => abrirItem(item);
   return div;
 }
 
-// ==========================
-// RENDER LISTAS
-// ==========================
 function renderCombos() {
-  const c = document.getElementById("lista-combos");
-  if (!c) return;
-
-  c.innerHTML = "";
-  COMBOS.forEach(i => c.appendChild(criarCard(i)));
+  lista_combos.innerHTML = "";
+  COMBOS.forEach(i => lista_combos.appendChild(criarCard(i)));
 }
 
 function renderCaldos() {
-  const c = document.getElementById("lista-caldos");
-  c.innerHTML = "";
-  CALDOS.forEach(i => c.appendChild(criarCard(i)));
+  lista_caldos.innerHTML = "";
+  CALDOS.forEach(i => lista_caldos.appendChild(criarCard(i)));
 }
 
 function renderBebidas() {
-  const c = document.getElementById("lista-bebidas");
-  c.innerHTML = "";
-  BEBIDAS.forEach(i => c.appendChild(criarCard(i)));
+  lista_bebidas.innerHTML = "";
+  BEBIDAS.forEach(i => lista_bebidas.appendChild(criarCard(i)));
 }
 
-// ==========================
-// ABRIR ITEM
-// ==========================
 function abrirItem(item) {
   itemAtual = item;
   quantidade = 1;
   adicionaisSelecionados = {};
 
-  document.getElementById("item-nome").innerText = item.nome;
-  document.getElementById("item-desc").innerText = item.descricao || "";
-  document.getElementById("item-preco").innerText = "R$ " + item.preco.toFixed(2);
-  document.getElementById("qtd").innerText = quantidade;
+  item_nome.innerText = item.nome;
+  item_desc.innerText = item.descricao || "";
+  item_preco.innerText = "R$ " + item.preco.toFixed(2);
+  qtd.innerText = quantidade;
 
-  if (item.tipo === "caldo") {
-    renderAdicionais();
-  } else {
-    document.getElementById("adicionais").innerHTML = "";
-  }
+  if (item.tipo === "caldo") renderAdicionais();
+  else adicionais.innerHTML = "";
 
   trocarTela("tela-item");
 }
 
-// ==========================
-// QUANTIDADE
-// ==========================
 function aumentar() {
   quantidade++;
-  document.getElementById("qtd").innerText = quantidade;
+  qtd.innerText = quantidade;
 }
 
 function diminuir() {
   if (quantidade > 1) quantidade--;
-  document.getElementById("qtd").innerText = quantidade;
+  qtd.innerText = quantidade;
 }
 
-function limparItem() {
-  quantidade = 1;
-  adicionaisSelecionados = {};
-  renderAdicionais();
-}
-
-// ==========================
-// ADICIONAIS
-// ==========================
 function renderAdicionais() {
-  const c = document.getElementById("adicionais");
-  c.innerHTML = "";
+  adicionais.innerHTML = "";
 
   ADICIONAIS_CALDOS.forEach(a => {
     const div = document.createElement("div");
@@ -137,54 +90,57 @@ function renderAdicionais() {
       <button onclick="maisAdicional(${a.id})">+</button>
     `;
 
-    c.appendChild(div);
+    adicionais.appendChild(div);
   });
 }
 
 function maisAdicional(id) {
   adicionaisSelecionados[id] = (adicionaisSelecionados[id] || 0) + 1;
-  atualizarAdicional(id);
+  atualizar(id);
 }
 
 function menosAdicional(id) {
   if (!adicionaisSelecionados[id]) return;
   adicionaisSelecionados[id]--;
-  atualizarAdicional(id);
+  atualizar(id);
 }
 
-function atualizarAdicional(id) {
+function atualizar(id) {
   document.getElementById("add-" + id).innerText = adicionaisSelecionados[id] || 0;
 }
 
-// ==========================
-// ADICIONAR AO CARRINHO
-// ==========================
 function addCarrinho() {
-  let adicionais = [];
+  let adicionaisArr = [];
   let total = itemAtual.preco * quantidade;
 
   for (let id in adicionaisSelecionados) {
     const a = ADICIONAIS_CALDOS.find(x => x.id == id);
-    const qtd = adicionaisSelecionados[id];
+    const qtdAdd = adicionaisSelecionados[id];
 
-    adicionais.push({ nome: a.nome, qtd, preco: a.preco });
-    total += a.preco * qtd;
+    adicionaisArr.push({ nome: a.nome, qtd: qtdAdd });
+    total += a.preco * qtdAdd;
   }
 
   carrinho.push({
     nome: itemAtual.nome,
     quantidade,
-    adicionais,
+    adicionais: adicionaisArr,
     total
   });
 
-  alert("Adicionado ao carrinho!");
+  atualizarSacola();
   trocarTela("tela-inicio");
 }
 
-// ==========================
-// CARRINHO
-// ==========================
+function atualizarSacola() {
+  const total = carrinho.reduce((s, i) => s + i.total, 0);
+  const qtd = carrinho.length;
+
+  total_sacola.innerText = "R$ " + total.toFixed(2);
+  badge.innerText = qtd;
+  sacola.style.display = qtd > 0 ? "flex" : "none";
+}
+
 function abrirCarrinho() {
   renderCarrinho();
   trocarTela("tela-carrinho");
@@ -192,14 +148,12 @@ function abrirCarrinho() {
 
 function limparCarrinho() {
   carrinho = [];
+  atualizarSacola();
   renderCarrinho();
 }
 
 function renderCarrinho() {
-  const c = document.getElementById("lista-carrinho");
-  const totalEl = document.getElementById("total");
-
-  c.innerHTML = "";
+  lista_carrinho.innerHTML = "";
   let total = 0;
 
   carrinho.forEach(item => {
@@ -213,17 +167,14 @@ function renderCarrinho() {
 
     const div = document.createElement("div");
     div.innerHTML = html;
-    c.appendChild(div);
+    lista_carrinho.appendChild(div);
 
     total += item.total;
   });
 
-  totalEl.innerText = "Total: R$ " + total.toFixed(2);
+  document.getElementById("total").innerText = "Total: R$ " + total.toFixed(2);
 }
 
-// ==========================
-// CHECKOUT
-// ==========================
 function irCheckout() {
   let total = carrinho.reduce((s, i) => s + i.total, 0);
 
@@ -232,14 +183,11 @@ function irCheckout() {
     return;
   }
 
-  trocarTela("tela-checkout");
+  enviarPedidoWhatsApp();
 }
 
-// ==========================
-// WHATSAPP
-// ==========================
 function enviarPedidoWhatsApp() {
-  let texto = "🧾 Pedido - Sabor do Caldo\n\n";
+  let texto = "Pedido:\n\n";
   let total = 0;
 
   carrinho.forEach(item => {
@@ -253,18 +201,15 @@ function enviarPedidoWhatsApp() {
     total += item.total;
   });
 
-  texto += `💰 Total: R$ ${total.toFixed(2)}\n\n`;
-
-  texto += `👤 Nome: ${document.getElementById("nome").value}\n`;
-  texto += `📍 Endereço: ${document.getElementById("endereco").value}\n`;
-  texto += `📞 Telefone: ${document.getElementById("telefone").value}\n`;
-
-  const pag = document.getElementById("pagamento").value;
-  texto += `💳 Pagamento: ${pag}\n`;
-
-  if (pag === "Dinheiro") {
-    texto += `💵 Troco: ${document.getElementById("troco").value}\n`;
-  }
+  texto += `Total: R$ ${total.toFixed(2)}\n\n`;
+  texto += `Nome: ${nome.value}\n`;
+  texto += `Endereço: ${endereco.value}\n`;
+  texto += `Telefone: ${telefone.value}`;
 
   window.open(`https://wa.me/5535999711358?text=${encodeURIComponent(texto)}`);
 }
+
+// salvar dados
+nome.oninput = () => localStorage.setItem("nome", nome.value);
+endereco.oninput = () => localStorage.setItem("endereco", endereco.value);
+telefone.oninput = () => localStorage.setItem("telefone", telefone.value);
