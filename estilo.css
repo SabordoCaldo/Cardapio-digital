@@ -8,23 +8,13 @@ body {
 }
 
 /* ==========================
-   TOPO (AGORA VERMELHO)
+   TOPO
 ========================== */
 .topo {
   text-align: center;
   padding: 18px;
   background: red;
   color: white;
-}
-
-.topo h1 {
-  margin: 0;
-  font-size: 20px;
-}
-
-.topo p {
-  margin: 5px 0 0;
-  font-size: 14px;
 }
 
 /* ==========================
@@ -47,42 +37,43 @@ h2 {
 }
 
 /* ==========================
-   SCROLL HORIZONTAL
+   LISTA (AGORA GRID)
 ========================== */
 .scroll {
-  display: flex;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 por linha */
   gap: 15px;
   padding: 10px 15px;
 }
 
 /* ==========================
-   CARD GRANDE
+   CARD ESTILO IFOOD
 ========================== */
 .card {
-  min-width: 280px;
-  max-width: 280px;
+  width: 100%;
   background: white;
   border-radius: 16px;
-  padding: 12px;
+  padding: 10px;
   box-shadow: 0 3px 10px rgba(0,0,0,0.1);
 }
 
+/* IMAGEM GRANDE */
 .card img {
   width: 100%;
-  height: 160px;
+  height: 140px;
   object-fit: cover;
   border-radius: 12px;
   background: #eee;
 }
 
+/* TEXTO */
 .card h3 {
-  font-size: 16px;
-  margin: 10px 0 5px;
+  font-size: 15px;
+  margin: 8px 0 5px;
 }
 
 .card p {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -108,7 +99,7 @@ button {
 }
 
 /* ==========================
-   BOTÕES FIXOS ITEM
+   FIXO ITEM
 ========================== */
 .fixo {
   position: fixed;
@@ -120,7 +111,6 @@ button {
 .fixo button {
   flex: 1;
   border-radius: 0;
-  font-size: 16px;
 }
 
 /* ==========================
@@ -136,17 +126,16 @@ button {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  font-size: 16px;
 }
 
 /* ==========================
-   MENU INFERIOR (MAIOR)
+   MENU INFERIOR
 ========================== */
 .menu {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 75px; /* AUMENTADO */
+  height: 75px;
   display: flex;
   background: white;
   border-top: 1px solid #ddd;
@@ -156,7 +145,7 @@ button {
   flex: 1;
   background: none;
   color: #444;
-  font-size: 14px; /* maior */
+  font-size: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
