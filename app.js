@@ -1,14 +1,23 @@
+// ==========================
+// VARIÁVEIS
+// ==========================
 let itemAtual = null;
 let quantidade = 1;
 let adicionaisSelecionados = {};
 let carrinho = [];
 
-// INICIO
-renderCombos();
-renderCaldos();
-renderBebidas();
+// ==========================
+// INICIAR
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  renderCombos();
+  renderCaldos();
+  renderBebidas();
+});
 
+// ==========================
 // TELAS
+// ==========================
 function trocarTela(id) {
   document.querySelectorAll(".tela").forEach(t => t.classList.remove("ativa"));
   document.getElementById(id).classList.add("ativa");
@@ -18,10 +27,12 @@ function voltar() {
   trocarTela("tela-inicio");
 }
 
+// ==========================
 // CARDS
+// ==========================
 function criarCard(item) {
   const div = document.createElement("div");
-  div.classList.add("card");
+  div.className = "card";
 
   div.innerHTML = `
     <img src="${item.imagem}">
@@ -29,13 +40,17 @@ function criarCard(item) {
     <p>R$ ${item.preco.toFixed(2)}</p>
   `;
 
-  div.onclick = () => abrirItem(item);
+  div.addEventListener("click", () => abrirItem(item));
+
   return div;
 }
 
+// ==========================
 // LISTAS
+// ==========================
 function renderCombos() {
   const c = document.getElementById("lista-combos");
+  if (!c) return;
   c.innerHTML = "";
   COMBOS.forEach(i => c.appendChild(criarCard(i)));
 }
@@ -52,34 +67,39 @@ function renderBebidas() {
   BEBIDAS.forEach(i => c.appendChild(criarCard(i)));
 }
 
+// ==========================
 // ITEM
+// ==========================
 function abrirItem(item) {
   itemAtual = item;
   quantidade = 1;
   adicionaisSelecionados = {};
 
-  item_nome.innerText = item.nome;
-  item_desc.innerText = item.descricao || "";
-  item_preco.innerText = "R$ " + item.preco.toFixed(2);
-  qtd.innerText = quantidade;
+  document.getElementById("item-nome").innerText = item.nome;
+  document.getElementById("item-desc").innerText = item.descricao || "";
+  document.getElementById("item-preco").innerText = "R$ " + item.preco.toFixed(2);
+  document.getElementById("qtd").innerText = quantidade;
 
   if (item.tipo === "caldo") {
     renderAdicionais();
   } else {
-    adicionais.innerHTML = "";
+    document.getElementById("adicionais").innerHTML = "";
   }
 
   trocarTela("tela-item");
 }
 
+// ==========================
+// QUANTIDADE
+// ==========================
 function aumentar() {
   quantidade++;
-  qtd.innerText = quantidade;
+  document.getElementById("qtd").innerText = quantidade;
 }
 
 function diminuir() {
   if (quantidade > 1) quantidade--;
-  qtd.innerText = quantidade;
+  document.getElementById("qtd").innerText = quantidade;
 }
 
 function limparItem() {
@@ -88,9 +108,12 @@ function limparItem() {
   renderAdicionais();
 }
 
+// ==========================
 // ADICIONAIS
+// ==========================
 function renderAdicionais() {
-  adicionais.innerHTML = "";
+  const c = document.getElementById("adicionais");
+  c.innerHTML = "";
 
   ADICIONAIS_CALDOS.forEach(a => {
     const div = document.createElement("div");
@@ -102,7 +125,7 @@ function renderAdicionais() {
       <button onclick="maisAdicional(${a.id})">+</button>
     `;
 
-    adicionais.appendChild(div);
+    c.appendChild(div);
   });
 }
 
@@ -121,27 +144,19 @@ function atualizar(id) {
   document.getElementById("add-" + id).innerText = adicionaisSelecionados[id] || 0;
 }
 
+// ==========================
 // CARRINHO
+// ==========================
 function addCarrinho() {
-  let adicionaisArr = [];
   let total = itemAtual.preco * quantidade;
-
-  for (let id in adicionaisSelecionados) {
-    const a = ADICIONAIS_CALDOS.find(x => x.id == id);
-    const qtd = adicionaisSelecionados[id];
-
-    adicionaisArr.push({ nome: a.nome, qtd, preco: a.preco });
-    total += a.preco * qtd;
-  }
 
   carrinho.push({
     nome: itemAtual.nome,
     quantidade,
-    preco: itemAtual.preco,
-    adicionais: adicionaisArr,
     total
   });
 
+  alert("Adicionado ao carrinho!");
   trocarTela("tela-inicio");
 }
 
@@ -156,29 +171,26 @@ function limparCarrinho() {
 }
 
 function renderCarrinho() {
+  const c = document.getElementById("lista-carrinho");
+  const totalEl = document.getElementById("total");
+
+  c.innerHTML = "";
   let total = 0;
-  lista_carrinho.innerHTML = "";
 
   carrinho.forEach(item => {
-    let html = `<b>${item.quantidade}x ${item.nome}</b><br>`;
-
-    item.adicionais.forEach(a => {
-      html += `+ ${a.qtd}x ${a.nome}<br>`;
-    });
-
-    html += "<hr>";
-
     const div = document.createElement("div");
-    div.innerHTML = html;
-    lista_carrinho.appendChild(div);
+    div.innerText = `${item.quantidade}x ${item.nome}`;
+    c.appendChild(div);
 
     total += item.total;
   });
 
-  total.innerText = "Total: R$ " + total.toFixed(2);
+  totalEl.innerText = "Total: R$ " + total.toFixed(2);
 }
 
+// ==========================
 // CHECKOUT
+// ==========================
 function irCheckout() {
   let total = carrinho.reduce((s, i) => s + i.total, 0);
 
@@ -190,34 +202,19 @@ function irCheckout() {
   trocarTela("tela-checkout");
 }
 
+// ==========================
 // WHATSAPP
+// ==========================
 function enviarPedidoWhatsApp() {
-  let texto = "🧾 Pedido - Sabor do Caldo\n\n";
+  let texto = "Pedido:\n\n";
   let total = 0;
 
   carrinho.forEach(item => {
     texto += `${item.quantidade}x ${item.nome}\n`;
-
-    item.adicionais.forEach(a => {
-      texto += `+ ${a.qtd}x ${a.nome}\n`;
-    });
-
-    texto += "\n";
     total += item.total;
   });
 
-  texto += `💰 Total: R$ ${total.toFixed(2)}\n\n`;
-
-  texto += `Nome: ${nome.value}\n`;
-  texto += `Endereço: ${endereco.value}\n`;
-  texto += `Telefone: ${telefone.value}\n`;
-
-  const pag = pagamento.value;
-  texto += `Pagamento: ${pag}\n`;
-
-  if (pag === "Dinheiro") {
-    texto += `Troco: ${troco.value}\n`;
-  }
+  texto += `\nTotal: R$ ${total.toFixed(2)}\n`;
 
   window.open(`https://wa.me/5535999711358?text=${encodeURIComponent(texto)}`);
-}
+    }
