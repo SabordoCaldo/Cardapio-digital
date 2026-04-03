@@ -1,9 +1,9 @@
 function editarPerfil() {
   trocarTela("dados");
 
-  document.getElementById("nome").value = localStorage.getItem("nome") || "";
-  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
-  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+  nome.value = localStorage.getItem("nome") || "";
+  endereco.value = localStorage.getItem("endereco") || "";
+  telefone.value = localStorage.getItem("telefone") || "";
 }
 
 function salvar() {
@@ -11,7 +11,7 @@ function salvar() {
   localStorage.setItem("endereco", endereco.value);
   localStorage.setItem("telefone", telefone.value);
 
-  alert("Dados salvos!");
+  alert("Salvo!");
   trocarTela("perfil");
 }
 
@@ -20,6 +20,9 @@ function sair() {
   trocarTela("inicio");
 }
 
+// ==========================
+// HISTÓRICO
+// ==========================
 function carregarHistorico() {
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
@@ -29,16 +32,14 @@ function carregarHistorico() {
     html += "<p>Nenhum pedido ainda</p>";
   } else {
     pedidos.slice(0, 5).forEach(p => {
-      html += `<div style="margin-bottom:10px;">`;
-      html += `<strong>${p.data}</strong><br>`;
+      html += `<div><strong>${p.data}</strong><br>`;
 
       for (let nome in p.itens) {
-        const item = p.itens[nome];
-        html += `${item.qtd}x ${nome}<br>`;
+        const i = p.itens[nome];
+        html += `${i.qtd}x ${nome}<br>`;
       }
 
-      html += `<strong>Total: R$ ${p.total.toFixed(2)}</strong>`;
-      html += `</div><hr>`;
+      html += `<strong>Total: R$ ${p.total.toFixed(2)}</strong></div><hr>`;
     });
   }
 
