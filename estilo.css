@@ -1,48 +1,6 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial;
-}
-
-body {
-  background: white;
-}
-
-/* TELAS */
-.tela {
-  display: none;
-  padding: 20px;
-}
-
-.tela.ativa {
-  display: block;
-}
-
-/* TOPO */
-.topo {
-  text-align: center;
-  margin-top: 40px;
-}
-
-.logo {
-  width: 120px;
-  height: 120px;
-  background: #ddd;
-  border-radius: 50%;
-  margin: 0 auto 15px;
-}
-
-.topo h1 {
-  font-size: 22px;
-}
-
-.topo p {
-  color: #666;
-}
-
-/* MENU */
+/* ==========================
+MENU INFERIOR
+========================== */
 .menu {
   position: fixed;
   bottom: 0;
@@ -63,7 +21,10 @@ body {
   align-items: center;
 }
 
-/* PERFIL */
+
+/* ==========================
+PERFIL
+========================== */
 .card-perfil {
   display: flex;
   flex-direction: column;
@@ -79,7 +40,10 @@ body {
   border-radius: 8px;
 }
 
-/* FORM */
+
+/* ==========================
+FORMULÁRIO
+========================== */
 .form {
   margin-top: 20px;
   display: flex;
@@ -101,6 +65,21 @@ body {
   border-radius: 8px;
 }
 
+
+/* ==========================
+UTILITÁRIOS
+========================== */
 .hidden {
   display: none;
+}
+
+
+/* ==========================
+TÍTULO DE SEÇÃO (SEPARADOR)
+========================== */
+.titulo-secao {
+  font-size: 12px;
+  color: #999;
+  margin: 20px 0 10px;
+  text-transform: uppercase;
 }
