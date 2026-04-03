@@ -1,63 +1,81 @@
-body {
-  font-family: Arial;
-  margin: 0;
-  background: white;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Sabor do Caldo</title>
+<link rel="stylesheet" href="estilo.css">
+</head>
+<body>
 
-h1, h2 {
-  text-align: center;
-  color: red;
-}
+<div id="tela-inicio" class="tela ativa">
+  <h1>🔥 Sabor do Caldo</h1>
+  <p>📍 Passos - MG</p>
 
-.tela {
-  display: none;
-  padding: 10px;
-}
+  <h2>Combos</h2>
+  <div class="scroll" id="lista-combos"></div>
 
-.ativa {
-  display: block;
-}
+  <h2>Caldos</h2>
+  <div class="scroll" id="lista-caldos"></div>
 
-.scroll {
-  display: flex;
-  overflow-x: auto;
-  gap: 10px;
-}
+  <h2>Bebidas</h2>
+  <div class="scroll" id="lista-bebidas"></div>
 
-.card {
-  min-width: 140px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  border: 1px solid #ddd;
-}
+  <button onclick="abrirCarrinho()">🛒 Carrinho</button>
+</div>
 
-.card img {
-  width: 100%;
-}
+<div id="tela-item" class="tela">
+  <button onclick="voltar()">⬅ Voltar</button>
 
-button {
-  background: red;
-  color: white;
-  border: none;
-  padding: 10px;
-  margin: 5px;
-}
+  <h2 id="item-nome"></h2>
+  <p id="item-desc"></p>
+  <p id="item-preco"></p>
 
-.quantidade {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-}
+  <div id="adicionais"></div>
 
-.fixo {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-}
+  <div class="quantidade">
+    <button onclick="diminuir()">-</button>
+    <span id="qtd">1</span>
+    <button onclick="aumentar()">+</button>
+  </div>
 
-.fixo button {
-  flex: 1;
-}
+  <div class="fixo">
+    <button onclick="limparItem()">Limpar</button>
+    <button onclick="addCarrinho()">Adicionar</button>
+  </div>
+</div>
+
+<div id="tela-carrinho" class="tela">
+  <h2>🛒 Carrinho</h2>
+  <div id="lista-carrinho"></div>
+  <h3 id="total"></h3>
+
+  <button onclick="limparCarrinho()">Limpar</button>
+  <button onclick="irCheckout()">Pedir</button>
+</div>
+
+<div id="tela-checkout" class="tela">
+  <h2>Finalizar Pedido</h2>
+
+  <input id="nome" placeholder="Nome"><br>
+  <input id="endereco" placeholder="Endereço"><br>
+  <input id="telefone" placeholder="Telefone"><br>
+
+  <select id="pagamento">
+    <option>Dinheiro</option>
+    <option>Pix</option>
+    <option>Cartão</option>
+  </select><br>
+
+  <input id="troco" placeholder="Troco para"><br>
+
+  <button onclick="enviarPedidoWhatsApp()">Enviar Pedido</button>
+</div>
+
+<script src="caldos.js"></script>
+<script src="bebidas.js"></script>
+<script src="combos.js"></script>
+<script src="adicionais-caldo.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
