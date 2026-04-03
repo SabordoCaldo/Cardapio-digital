@@ -10,9 +10,7 @@ body {
   background: white;
 }
 
-/* ==========================
-TELAS
-========================== */
+/* TELAS */
 .tela {
   display: none;
   padding: 20px;
@@ -22,9 +20,7 @@ TELAS
   display: block;
 }
 
-/* ==========================
-TOPO (LOGO + NOME)
-========================== */
+/* TOPO */
 .topo {
   text-align: center;
   margin-top: 40px;
@@ -46,9 +42,7 @@ TOPO (LOGO + NOME)
   color: #666;
 }
 
-/* ==========================
-MENU INFERIOR
-========================== */
+/* MENU */
 .menu {
   position: fixed;
   bottom: 0;
@@ -69,21 +63,12 @@ MENU INFERIOR
   align-items: center;
 }
 
-/* ==========================
-CARRINHO
-========================== */
-#carrinho {
-  background: white;
-}
-
-/* ==========================
-PERFIL
-========================== */
+/* PERFIL */
 .card-perfil {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .card-perfil button {
@@ -116,7 +101,6 @@ PERFIL
   border-radius: 8px;
 }
 
-/* OCULTO */
 .hidden {
   display: none;
 }
