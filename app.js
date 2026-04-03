@@ -7,6 +7,37 @@ function trocarTela(id) {
 }
 
 // ==========================
+// BLOQUEAR CAMPOS
+// ==========================
+function bloquearCampos(bloquear) {
+  document.getElementById("nome").readOnly = bloquear;
+  document.getElementById("endereco").readOnly = bloquear;
+  document.getElementById("telefone").readOnly = bloquear;
+
+  const botao = document.querySelector(".form button");
+  botao.style.display = bloquear ? "none" : "block";
+}
+
+// ==========================
+// ABRIR DADOS
+// ==========================
+function abrirDados() {
+  trocarTela("dados");
+
+  document.getElementById("nome").value = localStorage.getItem("nome") || "";
+  document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
+  document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+
+  const temDados = localStorage.getItem("nome");
+
+  if (temDados) {
+    bloquearCampos(true);
+  } else {
+    bloquearCampos(false);
+  }
+}
+
+// ==========================
 // SALVAR
 // ==========================
 function salvar() {
@@ -16,7 +47,6 @@ function salvar() {
 
   alert("Dados salvos!");
 
-  // volta para perfil
   trocarTela("perfil");
 }
 
@@ -29,6 +59,8 @@ function editarPerfil() {
   document.getElementById("nome").value = localStorage.getItem("nome") || "";
   document.getElementById("endereco").value = localStorage.getItem("endereco") || "";
   document.getElementById("telefone").value = localStorage.getItem("telefone") || "";
+
+  bloquearCampos(false);
 }
 
 // ==========================
