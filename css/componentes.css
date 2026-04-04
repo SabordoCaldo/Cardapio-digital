@@ -95,3 +95,10 @@ FORÇAR BOTÃO LIMPAR DADOS
   background: #e30613 !important;
   color: white !important;
 }
+
+/* ==========================
+REMOVER SOMBRA DO HISTÓRICO
+========================== */
+#historico button {
+  box-shadow: none !important;
+}
