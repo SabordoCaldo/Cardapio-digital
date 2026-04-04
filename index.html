@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sabor do Caldo</title>
 
-  <!-- ==========================
-  CSS SEPARADO
-  ========================== -->
+  <!-- CSS -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/perfil.css">
@@ -32,20 +30,12 @@ PERFIL
 <div id="perfil" class="tela">
 
   <button class="btn-topo" onclick="trocarTela('inicio')">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <svg width="20" height="20" viewBox="0 0 24 24">
       <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
 
-  <div class="topo-perfil">
   <h2>👤 Perfil</h2>
-
-  <button class="btn-topo" onclick="trocarTela('inicio')">
-    <svg width="20" height="20" viewBox="0 0 24 24">
-      <path d="M15 18L9 12L15 6" stroke-width="2"/>
-    </svg>
-  </button>
-</div>
 
   <div class="card-perfil">
     <button onclick="editarPerfil()">Dados do Cliente</button>
@@ -62,7 +52,7 @@ DADOS DO CLIENTE
 <div id="dados" class="tela">
 
   <button class="btn-topo" onclick="trocarTela('perfil')">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <svg width="20" height="20" viewBox="0 0 24 24">
       <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
   </button>
@@ -74,8 +64,9 @@ DADOS DO CLIENTE
     <input id="endereco" placeholder="Endereço">
     <input id="telefone" placeholder="Telefone">
 
-    <button onclick="salvar()">Salvar</button>
-    <button class="btn-danger" onclick="sair()">Limpar dados</button>
+    <!-- ✅ BOTÕES PADRÃO -->
+    <button class="btn btn-success" onclick="salvar()">Salvar</button>
+    <button class="btn btn-danger" onclick="sair()">Limpar dados</button>
   </div>
 
 </div>
