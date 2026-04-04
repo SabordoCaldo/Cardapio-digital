@@ -36,3 +36,12 @@ h2 {
   margin-top: 0;
   margin-bottom: 10px;
 }
+
+/* ==========================
+TOPO PERFIL
+========================== */
+.topo-perfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
