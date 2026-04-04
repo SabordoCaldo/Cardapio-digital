@@ -154,17 +154,24 @@ BOTÃO VOLTAR TOPO DIREITO
 ========================== */
 .btn-topo {
   position: absolute;
-  top: 8px;        /* 🔼 mais pra cima */
+  top: 8px;
   right: 15px;
 
-  background: white;
+  background: #fff;
   border: none;
-  border-radius: 10px;  /* 🔳 quadrado arredondado */
+  border-radius: 10px;
   padding: 8px 10px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+
+  z-index: 10; /* 🔥 garante que fique por cima */
+}
+
+/* ÍCONE */
+.btn-topo svg {
+  stroke: #000;
 }
