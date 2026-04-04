@@ -1,14 +1,51 @@
-/* TELAS */
+/* ==========================
+TELAS
+========================== */
 .tela {
   display: none;
   padding: 20px;
+  position: relative;
 }
 
 .tela.ativa {
   display: block;
 }
 
-/* MENU */
+/* ==========================
+TOPO
+========================== */
+.topo {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  background: #ddd;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+}
+
+.topo h1 {
+  font-size: 22px;
+}
+
+.topo p {
+  color: #666;
+}
+
+/* ==========================
+TÍTULOS
+========================== */
+h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* ==========================
+MENU
+========================== */
 .menu {
   position: fixed;
   bottom: 0;
@@ -30,18 +67,8 @@
 }
 
 /* ==========================
-TÍTULOS
+HISTÓRICO (ESCONDIDO)
 ========================== */
-h2 {
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-/* ==========================
-TOPO PERFIL
-========================== */
-.topo-perfil {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#historico {
+  display: none;
 }
