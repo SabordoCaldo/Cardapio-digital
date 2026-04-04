@@ -1,4 +1,13 @@
-/* FORM */
+/* ==========================
+POSICIONAMENTO BASE
+========================== */
+.tela {
+  position: relative;
+}
+
+/* ==========================
+FORMULÁRIOS
+========================== */
 .form {
   margin-top: 20px;
   display: flex;
@@ -20,7 +29,9 @@
   border-radius: 8px;
 }
 
-/* BOTÕES */
+/* ==========================
+BOTÕES PADRÃO
+========================== */
 .btn-success {
   background: green;
   color: white;
@@ -35,13 +46,15 @@
   padding: 12px;
 }
 
-/* BOTÃO TOPO */
+/* ==========================
+BOTÃO VOLTAR TOPO DIREITO
+========================== */
 .btn-topo {
   position: absolute;
-  top: 14px;
+  top: 20px;
   right: 15px;
 
-  background: #444 !important;
+  background: #444;
   border-radius: 10px;
   padding: 8px 10px;
 
@@ -54,5 +67,22 @@
 }
 
 .btn-topo svg {
-  stroke: #fff !important;
+  stroke: #fff;
+}
+
+/* ==========================
+HISTÓRICO
+========================== */
+#historico button {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* ==========================
+UTILITÁRIOS
+========================== */
+.hidden {
+  display: none;
 }
