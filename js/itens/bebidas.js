@@ -1,116 +1,95 @@
 // ==========================
-// BEBIDAS
+// CONTROLE DE QUANTIDADE
 // ==========================
-const BEBIDAS = [
+let qtdBebidas = {};
 
-    {
-        id: 101,
-        nome: "Coca-Cola Lata 350ml",
-        descricao: "",
-        preco: 5.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+function aumentarBebida(i) {
+  qtdBebidas[i] = (qtdBebidas[i] || 0) + 1;
+  atualizarQtdBebida(i);
+}
 
-    {
-        id: 102,
-        nome: "Coca-Cola Zero Lata",
-        descricao: "",
-        preco: 5.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+function diminuirBebida(i) {
+  if (!qtdBebidas[i]) return;
+  qtdBebidas[i]--;
+  atualizarQtdBebida(i);
+}
 
-    {
-        id: 103,
-        nome: "Fanta Laranja Lata",
-        descricao: "",
-        preco: 5.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+function atualizarQtdBebida(i) {
+  const span = document.getElementById(`qtd-bebida-${i}`);
+  if (span) {
+    span.innerText = qtdBebidas[i] || 0;
+  }
+}
 
-    {
-        id: 104,
-        nome: "Guaraná Antártica Lata",
-        descricao: "",
-        preco: 5.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+// ==========================
+// ADICIONAR AO CARRINHO
+// ==========================
+function adicionarBebida(i) {
+  const qtd = qtdBebidas[i] || 0;
 
-    {
-        id: 201,
-        nome: "Pepsi 1L",
-        descricao: "",
-        preco: 7.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  if (qtd === 0) {
+    alert("Selecione a quantidade");
+    return;
+  }
 
-    {
-        id: 202,
-        nome: "Sukita 1L",
-        descricao: "",
-        preco: 7.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  const item = BEBIDAS[i];
 
-    {
-        id: 203,
-        nome: "Guaraná Antártica 1L",
-        descricao: "",
-        preco: 7.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-    {
-        id: 301,
-        nome: "Coca-Cola 2L",
-        descricao: "",
-        preco: 10.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  carrinho.push({
+    nome: item.nome,
+    preco: item.preco,
+    qtd: qtd
+  });
 
-    {
-        id: 302,
-        nome: "Coca-Cola Zero 2L",
-        descricao: "",
-        preco: 10.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    {
-        id: 303,
-        nome: "Fanta Laranja 2L",
-        descricao: "",
-        preco: 10.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    },
+  qtdBebidas[i] = 0;
+  atualizarQtdBebida(i);
 
-    {
-        id: 304,
-        nome: "Guaraná Antártica 2L",
-        descricao: "",
-        preco: 10.00,
-        imagem: "https://via.placeholder.com/300",
-        tipo: "bebida",
-        disponivel: true
-    }
+  alert("Adicionado ao carrinho!");
+}
 
-];
+// ==========================
+// RENDERIZAR BEBIDAS
+// ==========================
+function carregarBebidas() {
+  const div = document.getElementById("bebidas");
+
+  let html = "<h2>Bebidas</h2>";
+
+  BEBIDAS.forEach((p, i) => {
+    if (!p.disponivel) return;
+
+    html += `
+      <div class="card">
+
+        <img src="${p.imagem}" alt="">
+
+        <div class="card-info">
+          <h3>${p.nome}</h3>
+          <p>${p.descricao || ""}</p>
+          <strong>R$ ${p.preco.toFixed(2)}</strong>
+
+          <div class="qtd-controle">
+            <button onclick="diminuirBebida(${i})">-</button>
+            <span id="qtd-bebida-${i}">0</span>
+            <button onclick="aumentarBebida(${i})">+</button>
+          </div>
+
+          <button class="btn btn-success" onclick="adicionarBebida(${i})">
+            Adicionar ao carrinho
+          </button>
+        </div>
+
+      </div>
+    `;
+  });
+
+  div.innerHTML = html;
+}
+
+// ==========================
+// INICIAR
+// ==========================
+carregarBebidas();
