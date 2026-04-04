@@ -1,5 +1,5 @@
 // ==========================
-// CONTROLE DE QUANTIDADE
+// CONTROLE
 // ==========================
 let qtdBebidas = {};
 
@@ -16,13 +16,11 @@ function diminuirBebida(i) {
 
 function atualizarQtdBebida(i) {
   const span = document.getElementById(`qtd-bebida-${i}`);
-  if (span) {
-    span.innerText = qtdBebidas[i] || 0;
-  }
+  if (span) span.innerText = qtdBebidas[i] || 0;
 }
 
 // ==========================
-// ADICIONAR AO CARRINHO
+// CARRINHO
 // ==========================
 function adicionarBebida(i) {
   const qtd = qtdBebidas[i] || 0;
@@ -51,7 +49,7 @@ function adicionarBebida(i) {
 }
 
 // ==========================
-// RENDERIZAR BEBIDAS
+// RENDER
 // ==========================
 function carregarBebidas() {
   const div = document.getElementById("bebidas");
@@ -63,12 +61,9 @@ function carregarBebidas() {
 
     html += `
       <div class="card">
-
-        <img src="${p.imagem}" alt="">
-
+        <img src="${p.imagem}">
         <div class="card-info">
           <h3>${p.nome}</h3>
-          <p>${p.descricao || ""}</p>
           <strong>R$ ${p.preco.toFixed(2)}</strong>
 
           <div class="qtd-controle">
@@ -81,7 +76,6 @@ function carregarBebidas() {
             Adicionar ao carrinho
           </button>
         </div>
-
       </div>
     `;
   });
@@ -89,7 +83,4 @@ function carregarBebidas() {
   div.innerHTML = html;
 }
 
-// ==========================
-// INICIAR
-// ==========================
 carregarBebidas();
