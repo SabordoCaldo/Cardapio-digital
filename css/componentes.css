@@ -51,8 +51,9 @@ BOTÃO VOLTAR TOPO DIREITO
 ========================== */
 .btn-topo {
   position: absolute;
-  top: 16px;
+  top: 50%;
   right: 15px;
+  transform: translateY(-50%);
 
   background: #444;
   border-radius: 10px;
