@@ -1,4 +1,6 @@
-/* RESET */
+/* ==========================
+RESET
+========================== */
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +12,9 @@ body {
   background: white;
 }
 
-/* TELAS */
+/* ==========================
+TELAS
+========================== */
 .tela {
   display: none;
   padding: 20px;
@@ -20,7 +24,9 @@ body {
   display: block;
 }
 
-/* TOPO */
+/* ==========================
+TOPO
+========================== */
 .topo {
   text-align: center;
   margin-top: 40px;
@@ -42,7 +48,9 @@ body {
   color: #666;
 }
 
-/* MENU */
+/* ==========================
+MENU
+========================== */
 .menu {
   position: fixed;
   bottom: 0;
@@ -63,7 +71,9 @@ body {
   align-items: center;
 }
 
-/* PERFIL */
+/* ==========================
+PERFIL
+========================== */
 .card-perfil {
   display: flex;
   flex-direction: column;
@@ -79,7 +89,9 @@ body {
   border-radius: 8px;
 }
 
-/* FORM */
+/* ==========================
+FORMULÁRIOS
+========================== */
 .form {
   margin-top: 20px;
   display: flex;
@@ -93,6 +105,7 @@ body {
   border-radius: 6px;
 }
 
+/* BOTÃO PADRÃO (SALVAR) */
 .form button {
   background: green;
   color: white;
@@ -101,14 +114,14 @@ body {
   border-radius: 8px;
 }
 
-.hidden {
-  display: none;
+/* BOTÃO LIMPAR DADOS */
+.form button.btn-danger {
+  background: #e30613;
 }
 
 /* ==========================
-BOTÃO LIMPAR DADOS (FORÇADO)
+UTILITÁRIOS
 ========================== */
-.btn-danger {
-  background: #e30613 !important;
-  color: white !important;
+.hidden {
+  display: none;
 }
