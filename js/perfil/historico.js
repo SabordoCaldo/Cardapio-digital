@@ -1,7 +1,7 @@
 function mostrarHistorico() {
   const div = document.getElementById("historico");
 
-  // 🔁 MOSTRA / ESCONDE
+  // Alternar mostrar/esconder
   if (div.innerHTML !== "") {
     div.innerHTML = "";
     return;
@@ -25,6 +25,7 @@ function mostrarHistorico() {
 
       html += `<strong>Total: R$ ${p.total.toFixed(2)}</strong><br>`;
 
+      // ✅ BOTÃO VERDE PADRÃO
       html += `
         <button class="btn-success" onclick="pedirNovamente(${index})">
           Pedir novamente
@@ -34,6 +35,7 @@ function mostrarHistorico() {
       html += `</div><hr>`;
     });
 
+    // ✅ BOTÃO VERMELHO PADRÃO
     html += `
       <button class="btn-danger" onclick="limparHistorico()">
         Limpar histórico
