@@ -104,3 +104,11 @@ body {
 .hidden {
   display: none;
 }
+
+/* ==========================
+BOTÃO LIMPAR DADOS (VERMELHO)
+========================== */
+.btn-danger {
+  background: #e30613;
+  color: white;
+}
