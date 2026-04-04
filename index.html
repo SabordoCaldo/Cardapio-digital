@@ -5,7 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sabor do Caldo</title>
 
-  <link rel="stylesheet" href="estilo.css">
+  <!-- ==========================
+  CSS SEPARADO
+  ========================== -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/perfil.css">
+  <link rel="stylesheet" href="css/componentes.css">
 </head>
 
 <body>
@@ -25,12 +31,11 @@ PERFIL
 ========================== -->
 <div id="perfil" class="tela">
 
-  <!-- BOTÃO VOLTAR -->
   <button class="btn-topo" onclick="trocarTela('inicio')">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M15 18L9 12L15 6" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</button>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 
   <h2>👤 Perfil</h2>
 
@@ -48,8 +53,11 @@ DADOS DO CLIENTE
 ========================== -->
 <div id="dados" class="tela">
 
-  <!-- BOTÃO VOLTAR -->
-  <button class="btn-topo" onclick="trocarTela('perfil')">←</button>
+  <button class="btn-topo" onclick="trocarTela('perfil')">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+      <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 
   <h2>📋 Dados do Cliente</h2>
 
