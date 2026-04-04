@@ -106,9 +106,9 @@ body {
 }
 
 /* ==========================
-BOTÃO LIMPAR DADOS (VERMELHO)
+BOTÃO LIMPAR DADOS (FORÇADO)
 ========================== */
 .btn-danger {
-  background: #e30613;
-  color: white;
+  background: #e30613 !important;
+  color: white !important;
 }
