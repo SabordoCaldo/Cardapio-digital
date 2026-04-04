@@ -1,7 +1,9 @@
 function mostrarHistorico() {
   const div = document.getElementById("historico");
 
-  if (div.innerHTML !== "") {
+  // 👉 SE já está aberto → fecha
+  if (div.style.display === "block") {
+    div.style.display = "none";
     div.innerHTML = "";
     return;
   }
@@ -41,4 +43,5 @@ function mostrarHistorico() {
   }
 
   div.innerHTML = html;
+  div.style.display = "block"; // 👉 mostra
 }
