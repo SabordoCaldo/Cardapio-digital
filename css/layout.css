@@ -28,3 +28,11 @@
   flex-direction: column;
   align-items: center;
 }
+
+/* ==========================
+TÍTULOS
+========================== */
+h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
