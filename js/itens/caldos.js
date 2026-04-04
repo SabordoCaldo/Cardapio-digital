@@ -1,4 +1,40 @@
 // ==========================
+// CALDOS
+// ==========================
+const CALDOS = [
+  {
+    id: 1,
+    nome: "Caldo Tradicional",
+    descricao: "Caldo de feijão cremoso e temperado.",
+    preco: 20.00,
+    imagem: "https://via.placeholder.com/300",
+    disponivel: true
+  },
+  {
+    id: 2,
+    nome: "Caldo com Calabresa e Bacon",
+    descricao: "Com calabresa e bacon.",
+    preco: 22.00,
+    imagem: "https://via.placeholder.com/300",
+    disponivel: true
+  }
+];
+
+// ==========================
+// ADICIONAIS
+// ==========================
+const ADICIONAIS_CALDOS = [
+  { nome: "Cheiro verde extra", preco: 1.00 },
+  { nome: "Ovo de codorna", preco: 1.00 },
+  { nome: "Pimenta biquinho", preco: 1.00 },
+  { nome: "Torrada", preco: 1.50 },
+  { nome: "Torresmo", preco: 5.00 },
+  { nome: "Calabresa", preco: 5.00 },
+  { nome: "Bacon", preco: 5.00 },
+  { nome: "Mussarela", preco: 6.00 }
+];
+
+// ==========================
 // CONTROLE DE QUANTIDADE
 // ==========================
 let qtdCaldos = {};
@@ -16,9 +52,7 @@ function diminuirCaldo(i) {
 
 function atualizarQtdCaldo(i) {
   const span = document.getElementById(`qtd-caldo-${i}`);
-  if (span) {
-    span.innerText = qtdCaldos[i] || 0;
-  }
+  if (span) span.innerText = qtdCaldos[i] || 0;
 }
 
 // ==========================
@@ -34,12 +68,23 @@ function adicionarCaldo(i) {
 
   const item = CALDOS[i];
 
+  const checks = document.querySelectorAll(`.add-${i}:checked`);
+
+  let adicionais = [];
+  let totalExtras = 0;
+
+  checks.forEach(c => {
+    adicionais.push(c.dataset.nome);
+    totalExtras += parseFloat(c.dataset.preco);
+  });
+
   let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
   carrinho.push({
     nome: item.nome,
-    preco: item.preco,
-    qtd: qtd
+    preco: item.preco + totalExtras,
+    qtd: qtd,
+    adicionais: adicionais
   });
 
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
@@ -47,7 +92,10 @@ function adicionarCaldo(i) {
   qtdCaldos[i] = 0;
   atualizarQtdCaldo(i);
 
-  alert("Adicionado ao carrinho!");
+  // limpa adicionais
+  checks.forEach(c => c.checked = false);
+
+  alert("Adicionado com adicionais!");
 }
 
 // ==========================
@@ -70,6 +118,19 @@ function carregarCaldos() {
           <h3>${p.nome}</h3>
           <p>${p.descricao}</p>
           <strong>R$ ${p.preco.toFixed(2)}</strong>
+
+          <div class="adicionais">
+            <p><strong>Adicionais:</strong></p>
+
+            ${ADICIONAIS_CALDOS.map(a => `
+              <label>
+                <input type="checkbox" class="add-${i}" 
+                  data-nome="${a.nome}" 
+                  data-preco="${a.preco}">
+                ${a.nome} (+R$ ${a.preco.toFixed(2)})
+              </label>
+            `).join("")}
+          </div>
 
           <div class="qtd-controle">
             <button onclick="diminuirCaldo(${i})">-</button>
