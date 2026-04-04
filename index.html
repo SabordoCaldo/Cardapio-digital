@@ -13,10 +13,19 @@
 
 <body>
 
+<!-- ==========================
+INICIO
+========================== -->
 <div id="inicio" class="tela ativa"></div>
 
+<!-- ==========================
+CARRINHO
+========================== -->
 <div id="carrinho" class="tela"></div>
 
+<!-- ==========================
+MINHA CONTA
+========================== -->
 <div id="perfil" class="tela">
 
   <button class="btn-topo" onclick="trocarTela('inicio')">
@@ -32,10 +41,14 @@
     <button onclick="mostrarHistorico()">Histórico de pedidos</button>
   </div>
 
+  <!-- HISTÓRICO (abre ao clicar) -->
   <div id="historico" style="margin-top:20px;"></div>
 
 </div>
 
+<!-- ==========================
+DADOS DO CLIENTE
+========================== -->
 <div id="dados" class="tela">
 
   <button class="btn-topo" onclick="trocarTela('perfil')">
@@ -57,12 +70,31 @@
 
 </div>
 
+<!-- ==========================
+MENU
+========================== -->
 <div class="menu">
-  <button onclick="trocarTela('inicio')">🏠<span>Início</span></button>
-  <button onclick="trocarTela('carrinho')">🛒<span>Carrinho</span></button>
-  <button onclick="trocarTela('perfil')">👤<span>Conta</span></button>
+
+  <button onclick="trocarTela('inicio')">
+    🏠
+    <span>Início</span>
+  </button>
+
+  <button onclick="trocarTela('carrinho')">
+    🛒
+    <span>Carrinho</span>
+  </button>
+
+  <button onclick="trocarTela('perfil')">
+    👤
+    <span>Conta</span>
+  </button>
+
 </div>
 
+<!-- ==========================
+SCRIPTS
+========================== -->
 <script src="js/produtos.js"></script>
 <script src="js/carrinho.js"></script>
 <script src="js/pagamento.js"></script>
