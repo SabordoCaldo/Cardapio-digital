@@ -1,4 +1,12 @@
 function mostrarHistorico() {
+  const div = document.getElementById("historico");
+
+  // 🔁 TOGGLE (MOSTRA / ESCONDE)
+  if (div.innerHTML !== "") {
+    div.innerHTML = "";
+    return;
+  }
+
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
   let html = "<h3>Histórico de pedidos</h3>";
@@ -22,5 +30,5 @@ function mostrarHistorico() {
     html += `<button onclick="limparHistorico()">Limpar histórico</button>`;
   }
 
-  document.getElementById("historico").innerHTML = html;
+  div.innerHTML = html;
 }
