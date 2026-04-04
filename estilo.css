@@ -114,9 +114,22 @@ FORMULÁRIOS
   border-radius: 8px;
 }
 
-/* BOTÃO LIMPAR DADOS */
-.form button.btn-danger {
+/* BOTÃO VERDE (REUTILIZÁVEL) */
+.btn-success {
+  background: green;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+/* BOTÃO VERMELHO */
+.btn-danger {
   background: #e30613;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
 }
 
 /* ==========================
