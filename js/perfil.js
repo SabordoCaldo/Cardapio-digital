@@ -29,7 +29,7 @@ function sair() {
 function mostrarHistorico() {
   const pedidos = JSON.parse(localStorage.getItem("pedidos")) || [];
 
-  let html = "<h3>📦 Histórico de pedidos</h3>";
+  let html = "<h3>   Histórico de pedidos</h3>";
 
   if (pedidos.length === 0) {
     html += "<p>Nenhum pedido ainda</p>";
