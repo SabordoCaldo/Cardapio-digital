@@ -87,3 +87,11 @@ UTILITÁRIOS
 .hidden {
   display: none;
 }
+
+/* ==========================
+FORÇAR BOTÃO LIMPAR DADOS
+========================== */
+.form button.btn-danger {
+  background: #e30613 !important;
+  color: white !important;
+}
