@@ -6,27 +6,29 @@ POSICIONAMENTO BASE
 }
 
 /* ==========================
-BOTÃO BASE
+BOTÃO BASE LIMPO
 ========================== */
 .btn {
   width: 100%;
   padding: 12px;
+
   border-radius: 8px;
   border: none;
+  outline: none;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
 
   font-size: 14px;
-  cursor: pointer;
+  text-align: center;
 
-  box-shadow: none !important; /* 🔥 REMOVE QUALQUER SOMBRA */
-  outline: none;
+  background: none;
+  box-shadow: none;
+
+  cursor: pointer;
 }
 
 /* ==========================
-VARIAÇÕES
+CORES
 ========================== */
 .btn-success {
   background: green;
@@ -59,16 +61,6 @@ FORMULÁRIOS
   border-radius: 6px;
 }
 
-/* REMOVE ESTILO ANTIGO (IMPORTANTE) */
-.form button {
-  all: unset;
-}
-
-/* USA PADRÃO PROFISSIONAL */
-.form button.btn {
-  width: 100%;
-}
-
 /* ==========================
 BOTÃO VOLTAR
 ========================== */
@@ -85,8 +77,7 @@ BOTÃO VOLTAR
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-  z-index: 999;
+  box-shadow: none;
 }
 
 .btn-topo svg {
@@ -94,23 +85,8 @@ BOTÃO VOLTAR
 }
 
 /* ==========================
-HISTÓRICO
-========================== */
-#historico button {
-  width: 100%;
-  margin-top: 8px;
-}
-
-/* ==========================
 UTILITÁRIOS
 ========================== */
 .hidden {
   display: none;
-}
-
-/* ==========================
-REMOVER SOMBRA DOS BOTÕES
-========================== */
-button {
-  box-shadow: none !important;
 }
