@@ -6,7 +6,12 @@ function trocarTela(id) {
 
   tela.classList.add("ativa");
 
-  if (id === "inicio") carregarInicio();
+  if (id === "inicio") {
+    carregarCombos();
+    carregarCaldos();
+    carregarBebidas();
+  }
+
   if (id === "carrinho") carregarCarrinho();
 
   if (id === "perfil") {
@@ -20,4 +25,6 @@ function trocarTela(id) {
   }
 }
 
-carregarInicio();
+carregarCombos();
+carregarCaldos();
+carregarBebidas();
