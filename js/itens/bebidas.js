@@ -1,5 +1,29 @@
 // ==========================
-// PREÇOS FIXOS
+// DADOS
+// ==========================
+const BEBIDAS = [
+
+    // LATA
+    { id: 101, nome: "Coca-Cola Lata 350ml", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
+    { id: 102, nome: "Coca-Cola Zero Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
+    { id: 103, nome: "Fanta Laranja Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
+    { id: 104, nome: "Guaraná Antártica Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
+
+    // 1L
+    { id: 201, nome: "Pepsi 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
+    { id: 202, nome: "Sukita 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
+    { id: 203, nome: "Guaraná Antártica 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
+
+    // 2L
+    { id: 301, nome: "Coca-Cola 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
+    { id: 302, nome: "Coca-Cola Zero 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
+    { id: 303, nome: "Fanta Laranja 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
+    { id: 304, nome: "Guaraná Antártica 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" }
+
+];
+
+// ==========================
+// PREÇOS
 // ==========================
 const PRECOS = {
     "LATA": 6.5,
@@ -32,14 +56,11 @@ function carregarBebidas() {
 
             html += `
                 <div class="card" onclick="abrirBebida(${p.id})">
-
                     <img src="${p.imagem}">
-
                     <div class="card-info">
                         <h3>${p.nome}</h3>
                         <strong>R$ ${PRECOS[grupo].toFixed(2)}</strong>
                     </div>
-
                 </div>
             `;
         });
