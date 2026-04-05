@@ -1,35 +1,21 @@
 // ==========================
-// DADOS
+// PRODUTO ÚNICO (LATA)
 // ==========================
-const BEBIDAS = [
-
-    // LATA
-    { id: 101, nome: "Coca-Cola Lata 350ml", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
-    { id: 102, nome: "Coca-Cola Zero Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
-    { id: 103, nome: "Fanta Laranja Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
-    { id: 104, nome: "Guaraná Antártica Lata", subcategoria: "LATA", imagem: "https://via.placeholder.com/300" },
-
-    // 1L
-    { id: 201, nome: "Pepsi 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
-    { id: 202, nome: "Sukita 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
-    { id: 203, nome: "Guaraná Antártica 1L", subcategoria: "1L", imagem: "https://via.placeholder.com/300" },
-
-    // 2L
-    { id: 301, nome: "Coca-Cola 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
-    { id: 302, nome: "Coca-Cola Zero 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
-    { id: 303, nome: "Fanta Laranja 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" },
-    { id: 304, nome: "Guaraná Antártica 2L", subcategoria: "2L", imagem: "https://via.placeholder.com/300" }
-
-];
-
-// ==========================
-// PREÇOS
-// ==========================
-const PRECOS_BEBIDAS = {
-    "LATA": 6.5,
-    "1L": 11,
-    "2L": 16
+const BEBIDA_LATA = {
+    nome: "Refrigerante Lata 350ml",
+    preco: 6.5,
+    imagem: "https://via.placeholder.com/300"
 };
+
+// ==========================
+// SABORES
+// ==========================
+const SABORES_LATA = [
+    "Coca-Cola",
+    "Coca-Cola Zero",
+    "Fanta Laranja",
+    "Guaraná Antártica"
+];
 
 // ==========================
 // LISTA (HOME)
@@ -37,35 +23,17 @@ const PRECOS_BEBIDAS = {
 function carregarBebidas() {
     const div = document.getElementById("bebidas");
 
-    let html = "<h2>Bebidas</h2>";
+    let html = `
+        <h2>Bebidas</h2>
 
-    const grupos = ["LATA", "1L", "2L"];
-
-    grupos.forEach(grupo => {
-
-        const titulo =
-            grupo === "LATA" ? "Lata 350ml" :
-            grupo === "1L" ? "1 Litro" :
-            "2 Litros";
-
-        html += `<h3>${titulo}</h3>`;
-
-        BEBIDAS
-        .filter(b => b.subcategoria === grupo)
-        .forEach((p) => {
-
-            html += `
-                <div class="card" onclick="abrirBebida(${p.id})">
-                    <img src="${p.imagem}">
-                    <div class="card-info">
-                        <h3>${p.nome}</h3>
-                        <strong>R$ ${PRECOS_BEBIDAS[grupo].toFixed(2)}</strong>
-                    </div>
-                </div>
-            `;
-        });
-
-    });
+        <div class="card" onclick="abrirLata()">
+            <img src="${BEBIDA_LATA.imagem}">
+            <div class="card-info">
+                <h3>${BEBIDA_LATA.nome}</h3>
+                <strong>R$ ${BEBIDA_LATA.preco.toFixed(2)}</strong>
+            </div>
+        </div>
+    `;
 
     div.innerHTML = html;
 }
@@ -73,30 +41,35 @@ function carregarBebidas() {
 // ==========================
 // ABRIR PRODUTO
 // ==========================
-let qtdBebida = 1;
+let quantidadesSabores = {};
 
-function abrirBebida(id) {
-    const item = BEBIDAS.find(b => b.id === id);
-
-    qtdBebida = 1;
-
-    const preco = PRECOS_BEBIDAS[item.subcategoria];
+function abrirLata() {
+    quantidadesSabores = {};
 
     let html = `
-        <img src="${item.imagem}" style="width:100%; border-radius:10px;">
+        <img src="${BEBIDA_LATA.imagem}" style="width:100%; border-radius:10px;">
 
-        <h2>${item.nome}</h2>
-        <strong>R$ ${preco.toFixed(2)}</strong>
+        <h2>${BEBIDA_LATA.nome}</h2>
+        <strong>R$ ${BEBIDA_LATA.preco.toFixed(2)}</strong>
 
-        <div class="qtd-controle">
-            <button onclick="diminuirBebida()">-</button>
-            <span id="qtd-bebida">1</span>
-            <button onclick="aumentarBebida()">+</button>
-        </div>
+        <h3>Escolha os sabores</h3>
+    `;
 
+    SABORES_LATA.forEach((sabor, i) => {
+        html += `
+            <div class="qtd-controle">
+                <span>${sabor}</span>
+                <button onclick="diminuirSabor(${i})">-</button>
+                <span id="sabor-${i}">0</span>
+                <button onclick="aumentarSabor(${i})">+</button>
+            </div>
+        `;
+    });
+
+    html += `
         <textarea id="obs-bebida" placeholder="Observação..."></textarea>
 
-        <button class="btn btn-success" onclick="addCarrinhoBebida(${id})">
+        <button class="btn btn-success" onclick="addCarrinhoLata()">
             Adicionar ao carrinho
         </button>
     `;
@@ -108,35 +81,49 @@ function abrirBebida(id) {
 // ==========================
 // CONTROLE
 // ==========================
-function aumentarBebida() {
-    qtdBebida++;
-    document.getElementById("qtd-bebida").innerText = qtdBebida;
+function aumentarSabor(i) {
+    quantidadesSabores[i] = (quantidadesSabores[i] || 0) + 1;
+    document.getElementById(`sabor-${i}`).innerText = quantidadesSabores[i];
 }
 
-function diminuirBebida() {
-    if (qtdBebida > 1) qtdBebida--;
-    document.getElementById("qtd-bebida").innerText = qtdBebida;
+function diminuirSabor(i) {
+    if (!quantidadesSabores[i]) return;
+    quantidadesSabores[i]--;
+    document.getElementById(`sabor-${i}`).innerText = quantidadesSabores[i];
 }
 
 // ==========================
 // CARRINHO
 // ==========================
-function addCarrinhoBebida(id) {
-    const item = BEBIDAS.find(b => b.id === id);
-    const preco = PRECOS_BEBIDAS[item.subcategoria];
-
+function addCarrinhoLata() {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
+    let totalQtd = 0;
+    let lista = [];
+
+    SABORES_LATA.forEach((sabor, i) => {
+        if (quantidadesSabores[i]) {
+            totalQtd += quantidadesSabores[i];
+            lista.push(`${sabor} x${quantidadesSabores[i]}`);
+        }
+    });
+
+    if (totalQtd === 0) {
+        alert("Escolha pelo menos 1 unidade");
+        return;
+    }
+
     carrinho.push({
-        nome: item.nome,
-        preco: preco,
-        quantidade: qtdBebida,
+        nome: BEBIDA_LATA.nome,
+        preco: BEBIDA_LATA.preco,
+        quantidade: totalQtd,
+        adicionais: lista,
         observacao: document.getElementById("obs-bebida").value
     });
 
     localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-    alert("Bebida adicionada!");
+    alert("Adicionado!");
 }
 
 // ==========================
