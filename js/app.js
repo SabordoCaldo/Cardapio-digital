@@ -13,16 +13,6 @@ function trocarTela(id) {
   }
 
   if (id === "carrinho") carregarCarrinho();
-
-  if (id === "perfil") {
-    if (typeof carregarHistorico === "function") {
-      carregarHistorico();
-    }
-
-    if (typeof mostrarDadosCliente === "function") {
-      mostrarDadosCliente();
-    }
-  }
 }
 
 carregarCombos();
