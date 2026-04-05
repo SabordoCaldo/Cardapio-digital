@@ -5,6 +5,9 @@ TELAS
   display: none;
   padding: 20px;
   position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-bottom: 140px;
 }
 
 .tela.ativa {
@@ -55,6 +58,7 @@ MENU
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
+  z-index: 999;
 }
 
 .menu button {
@@ -67,15 +71,8 @@ MENU
 }
 
 /* ==========================
-HISTÓRICO (ESCONDIDO)
+HISTÓRICO
 ========================== */
 #historico {
   display: none;
-}
-
-/* ==========================
-ESPAÇO PARA MENU INFERIOR
-========================== */
-body {
-  padding-bottom: 90px;
 }
