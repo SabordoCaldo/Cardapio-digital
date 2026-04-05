@@ -72,3 +72,10 @@ HISTÓRICO (ESCONDIDO)
 #historico {
   display: none;
 }
+
+/* ==========================
+ESPAÇO PARA MENU INFERIOR
+========================== */
+body {
+  padding-bottom: 90px;
+}
