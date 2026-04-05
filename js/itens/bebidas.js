@@ -25,7 +25,7 @@ const BEBIDAS = [
 // ==========================
 // PREÇOS
 // ==========================
-const PRECOS = {
+const PRECOS_BEBIDAS = {
     "LATA": 6.5,
     "1L": 11,
     "2L": 16
@@ -59,7 +59,7 @@ function carregarBebidas() {
                     <img src="${p.imagem}">
                     <div class="card-info">
                         <h3>${p.nome}</h3>
-                        <strong>R$ ${PRECOS[grupo].toFixed(2)}</strong>
+                        <strong>R$ ${PRECOS_BEBIDAS[grupo].toFixed(2)}</strong>
                     </div>
                 </div>
             `;
@@ -80,7 +80,7 @@ function abrirBebida(id) {
 
     qtdBebida = 1;
 
-    const preco = PRECOS[item.subcategoria];
+    const preco = PRECOS_BEBIDAS[item.subcategoria];
 
     let html = `
         <img src="${item.imagem}" style="width:100%; border-radius:10px;">
@@ -123,7 +123,7 @@ function diminuirBebida() {
 // ==========================
 function addCarrinhoBebida(id) {
     const item = BEBIDAS.find(b => b.id === id);
-    const preco = PRECOS[item.subcategoria];
+    const preco = PRECOS_BEBIDAS[item.subcategoria];
 
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
