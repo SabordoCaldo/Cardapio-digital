@@ -1,86 +1,122 @@
 // ==========================
+// PREÇOS FIXOS
+// ==========================
+const PRECOS = {
+    "LATA": 6.5,
+    "1L": 11,
+    "2L": 16
+};
+
+// ==========================
+// LISTA (HOME)
+// ==========================
+function carregarBebidas() {
+    const div = document.getElementById("bebidas");
+
+    let html = "<h2>Bebidas</h2>";
+
+    const grupos = ["LATA", "1L", "2L"];
+
+    grupos.forEach(grupo => {
+
+        const titulo =
+            grupo === "LATA" ? "Lata 350ml" :
+            grupo === "1L" ? "1 Litro" :
+            "2 Litros";
+
+        html += `<h3>${titulo}</h3>`;
+
+        BEBIDAS
+        .filter(b => b.subcategoria === grupo)
+        .forEach((p) => {
+
+            html += `
+                <div class="card" onclick="abrirBebida(${p.id})">
+
+                    <img src="${p.imagem}">
+
+                    <div class="card-info">
+                        <h3>${p.nome}</h3>
+                        <strong>R$ ${PRECOS[grupo].toFixed(2)}</strong>
+                    </div>
+
+                </div>
+            `;
+        });
+
+    });
+
+    div.innerHTML = html;
+}
+
+// ==========================
+// ABRIR PRODUTO
+// ==========================
+let qtdBebida = 1;
+
+function abrirBebida(id) {
+    const item = BEBIDAS.find(b => b.id === id);
+
+    qtdBebida = 1;
+
+    const preco = PRECOS[item.subcategoria];
+
+    let html = `
+        <img src="${item.imagem}" style="width:100%; border-radius:10px;">
+
+        <h2>${item.nome}</h2>
+        <strong>R$ ${preco.toFixed(2)}</strong>
+
+        <div class="qtd-controle">
+            <button onclick="diminuirBebida()">-</button>
+            <span id="qtd-bebida">1</span>
+            <button onclick="aumentarBebida()">+</button>
+        </div>
+
+        <textarea id="obs-bebida" placeholder="Observação..."></textarea>
+
+        <button class="btn btn-success" onclick="addCarrinhoBebida(${id})">
+            Adicionar ao carrinho
+        </button>
+    `;
+
+    document.getElementById("produto-detalhe").innerHTML = html;
+    trocarTela("produto");
+}
+
+// ==========================
 // CONTROLE
 // ==========================
-let qtdBebidas = {};
-
-function aumentarBebida(i) {
-  qtdBebidas[i] = (qtdBebidas[i] || 0) + 1;
-  atualizarQtdBebida(i);
+function aumentarBebida() {
+    qtdBebida++;
+    document.getElementById("qtd-bebida").innerText = qtdBebida;
 }
 
-function diminuirBebida(i) {
-  if (!qtdBebidas[i]) return;
-  qtdBebidas[i]--;
-  atualizarQtdBebida(i);
-}
-
-function atualizarQtdBebida(i) {
-  const span = document.getElementById(`qtd-bebida-${i}`);
-  if (span) span.innerText = qtdBebidas[i] || 0;
+function diminuirBebida() {
+    if (qtdBebida > 1) qtdBebida--;
+    document.getElementById("qtd-bebida").innerText = qtdBebida;
 }
 
 // ==========================
 // CARRINHO
 // ==========================
-function adicionarBebida(i) {
-  const qtd = qtdBebidas[i] || 0;
+function addCarrinhoBebida(id) {
+    const item = BEBIDAS.find(b => b.id === id);
+    const preco = PRECOS[item.subcategoria];
 
-  if (qtd === 0) {
-    alert("Selecione a quantidade");
-    return;
-  }
+    let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
-  const item = BEBIDAS[i];
+    carrinho.push({
+        nome: item.nome,
+        preco: preco,
+        quantidade: qtdBebida,
+        observacao: document.getElementById("obs-bebida").value
+    });
 
-  let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 
-  carrinho.push({
-    nome: item.nome,
-    preco: item.preco,
-    qtd: qtd
-  });
-
-  localStorage.setItem("carrinho", JSON.stringify(carrinho));
-
-  qtdBebidas[i] = 0;
-  atualizarQtdBebida(i);
-
-  alert("Adicionado ao carrinho!");
+    alert("Bebida adicionada!");
 }
 
 // ==========================
-// RENDER
-// ==========================
-function carregarBebidas() {
-  const div = document.getElementById("bebidas");
-
-  let html = "<h2>Bebidas</h2>";
-
-  BEBIDAS.forEach((p, i) => {
-    if (!p.disponivel) return;
-
-    html += `
-      <div class="card">
-        <img src="${p.imagem}">
-        <div class="card-info">
-          <h3>${p.nome}</h3>
-          <strong>R$ ${p.preco.toFixed(2)}</strong>
-
-          <div class="qtd-controle">
-            <button onclick="diminuirBebida(${i})">-</button>
-            <span id="qtd-bebida-${i}">0</span>
-            <button onclick="aumentarBebida(${i})">+</button>
-          </div>
-
-          <button class="btn btn-success" onclick="adicionarBebida(${i})">
-            Adicionar ao carrinho
-          </button>
-        </div>
-      </div>
-    `;
-  });
-
-  div.innerHTML = html;
-}
-
 carregarBebidas();
