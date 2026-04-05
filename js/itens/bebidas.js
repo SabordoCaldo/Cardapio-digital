@@ -43,12 +43,12 @@ function carregarBebidas() {
 // ==========================
 // ABRIR
 // ==========================
-let qtdSabores = {};
+let qtdSaboresBebida = {};
 let bebidaAtual = null;
 
 function abrirBebida(i) {
     bebidaAtual = TIPOS_BEBIDA[i];
-    qtdSabores = {};
+    qtdSaboresBebida = {};
 
     let html = `
         <img src="https://via.placeholder.com/300" style="width:100%; border-radius:10px;">
@@ -62,9 +62,9 @@ function abrirBebida(i) {
         html += `
             <div class="qtd-controle">
                 <span>${s}</span>
-                <button onclick="menos(${index})">-</button>
-                <span id="qtd-${index}">0</span>
-                <button onclick="mais(${index})">+</button>
+                <button onclick="menosBebida(${index})">-</button>
+                <span id="qtd-bebida-${index}">0</span>
+                <button onclick="maisBebida(${index})">+</button>
             </div>
         `;
     });
@@ -72,7 +72,7 @@ function abrirBebida(i) {
     html += `
         <textarea id="obs-bebida" placeholder="Observação..."></textarea>
 
-        <button class="btn btn-success" onclick="addCarrinho()">
+        <button class="btn btn-success" onclick="addCarrinhoBebida()">
             Adicionar ao carrinho
         </button>
     `;
@@ -84,30 +84,30 @@ function abrirBebida(i) {
 // ==========================
 // CONTROLE
 // ==========================
-function mais(i) {
-    qtdSabores[i] = (qtdSabores[i] || 0) + 1;
-    document.getElementById(`qtd-${i}`).innerText = qtdSabores[i];
+function maisBebida(i) {
+    qtdSaboresBebida[i] = (qtdSaboresBebida[i] || 0) + 1;
+    document.getElementById(`qtd-bebida-${i}`).innerText = qtdSaboresBebida[i];
 }
 
-function menos(i) {
-    if (!qtdSabores[i]) return;
-    qtdSabores[i]--;
-    document.getElementById(`qtd-${i}`).innerText = qtdSabores[i];
+function menosBebida(i) {
+    if (!qtdSaboresBebida[i]) return;
+    qtdSaboresBebida[i]--;
+    document.getElementById(`qtd-bebida-${i}`).innerText = qtdSaboresBebida[i];
 }
 
 // ==========================
 // CARRINHO
 // ==========================
-function addCarrinho() {
+function addCarrinhoBebida() {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
     let total = 0;
     let lista = [];
 
     SABORES.forEach((s, i) => {
-        if (qtdSabores[i]) {
-            total += qtdSabores[i];
-            lista.push(`${s} x${qtdSabores[i]}`);
+        if (qtdSaboresBebida[i]) {
+            total += qtdSaboresBebida[i];
+            lista.push(`${s} x${qtdSaboresBebida[i]}`);
         }
     });
 
