@@ -157,3 +157,15 @@ UTILITÁRIOS
 .hidden {
   display: none;
 }
+
+/* ==========================
+BEBIDAS
+========================== */
+#bebidas h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#bebidas .card {
+  margin-bottom: 12px;
+}
