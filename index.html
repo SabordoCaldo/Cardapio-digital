@@ -13,66 +13,37 @@
 
 <body>
 
-<!-- ==========================
-INÍCIO
-========================== -->
 <div id="inicio" class="tela ativa">
-
   <div class="topo">
     <div class="logo"></div>
     <h1>Sabor do Caldo</h1>
     <p>Caldos quentes preparados na hora</p>
   </div>
 
-  <!-- COMBOS -->
   <div id="combos"></div>
-
-  <!-- CALDOS -->
   <div id="caldos"></div>
-
-  <!-- BEBIDAS -->
   <div id="bebidas"></div>
-
 </div>
 
-<!-- ==========================
-CARRINHO
-========================== -->
+<div id="produto" class="tela">
+  <button class="btn-topo" onclick="trocarTela('inicio')">←</button>
+  <div id="produto-detalhe"></div>
+</div>
+
 <div id="carrinho" class="tela"></div>
 
-<!-- ==========================
-MINHA CONTA
-========================== -->
 <div id="perfil" class="tela">
-
-  <button class="btn-topo" onclick="trocarTela('inicio')">
-    <svg width="20" height="20" viewBox="0 0 24 24">
-      <path d="M15 18L9 12L15 6" stroke-width="2"/>
-    </svg>
-  </button>
-
+  <button class="btn-topo" onclick="trocarTela('inicio')">←</button>
   <h2>Minha Conta</h2>
-
   <div class="card-perfil">
     <button onclick="editarPerfil()">Dados do Cliente</button>
     <button onclick="mostrarHistorico()">Histórico de pedidos</button>
   </div>
-
-  <div id="historico" style="margin-top:20px;"></div>
-
+  <div id="historico"></div>
 </div>
 
-<!-- ==========================
-DADOS DO CLIENTE
-========================== -->
 <div id="dados" class="tela">
-
-  <button class="btn-topo" onclick="trocarTela('perfil')">
-    <svg width="20" height="20" viewBox="0 0 24 24">
-      <path d="M15 18L9 12L15 6" stroke-width="2"/>
-    </svg>
-  </button>
-
+  <button class="btn-topo" onclick="trocarTela('perfil')">←</button>
   <h2>Dados do Cliente</h2>
 
   <div class="form">
@@ -83,34 +54,13 @@ DADOS DO CLIENTE
     <button class="btn btn-success" onclick="salvar()">Salvar</button>
     <button class="btn btn-danger" onclick="sair()">Limpar dados</button>
   </div>
-
 </div>
 
-<!-- ==========================
-MENU
-========================== -->
 <div class="menu">
-
-  <button onclick="trocarTela('inicio')">
-    🏠
-    <span>Início</span>
-  </button>
-
-  <button onclick="trocarTela('carrinho')">
-    🛒
-    <span>Carrinho</span>
-  </button>
-
-  <button onclick="trocarTela('perfil')">
-    👤
-    <span>Conta</span>
-  </button>
-
+  <button onclick="trocarTela('inicio')">🏠</button>
+  <button onclick="trocarTela('carrinho')">🛒</button>
+  <button onclick="trocarTela('perfil')">👤</button>
 </div>
-
-<!-- ==========================
-SCRIPTS
-========================== -->
 
 <script src="js/carrinho.js"></script>
 <script src="js/pagamento.js"></script>
@@ -119,7 +69,6 @@ SCRIPTS
 <script src="js/perfil/historico.js"></script>
 <script src="js/perfil/limpar.js"></script>
 
-<!-- ITENS -->
 <script src="js/itens/combos.js"></script>
 <script src="js/itens/caldos.js"></script>
 <script src="js/itens/bebidas.js"></script>
